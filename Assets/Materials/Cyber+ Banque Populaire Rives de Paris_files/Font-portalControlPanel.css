@@ -1,0 +1,30 @@
+/**
+ * Définition des polices présentes dans la télécommande.
+ *
+ * @author Benjamin FONTAINE
+ */
+/****** Nom de l'univers **********/
+
+#cpl li {
+    list-style-type: none;
+}
+
+#cpl li a {
+    font-size: 12px !important;
+    color: #10153b !important;
+    font-weight: normal;
+    font-family: "ubuntu", Helvetica, Arial, sans-serif;
+}
+
+#cpl li.sel > a {
+    font-weight: 800 !important;
+    color: #051B71 !important;
+    font-family: "Ubuntu-Bold", Helvetica, Arial, sans-serif;
+}
+
+#ulb p{
+	font-size: 18px !important;
+    font-weight: bold;
+    color: #ffffff;
+	text-transform: capitalize;
+}

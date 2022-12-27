@@ -1,0 +1,2 @@
+var FACIL_ITI={data:[],conf:function conf(){this.data.push(arguments)},register:function register(e){var t=document.createElement("script");t.async=1,t.src=e;var r=document.getElementsByTagName("script")[0];r.parentNode.insertBefore(t,r)}};
+//# sourceMappingURL=faciliti.js.map

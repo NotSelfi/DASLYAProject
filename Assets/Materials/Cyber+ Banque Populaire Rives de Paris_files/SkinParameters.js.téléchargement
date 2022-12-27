@@ -1,0 +1,2 @@
+var SkinParameters=new function(){var n=new Map;this.addParameter=function(a,e){n.set(a,e)},this.getParameter=function(a){var e=n.get(a);return void 0===e&&(e="UnknownSkinParam_"+a),e}};
+//# sourceMappingURL=SkinParameters.js.map

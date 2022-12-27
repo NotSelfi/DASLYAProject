@@ -1,0 +1,2 @@
+function assertAssert(s,t){s||alert(t)}function Assert(){}Assert.prototype.constructor=Assert,Assert.assert=assertAssert;
+//# sourceMappingURL=Assert.js.map

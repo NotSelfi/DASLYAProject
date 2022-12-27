@@ -7,6 +7,8 @@ public class MyCharacterController : MonoBehaviour
     //Lesly
     public Transform tr;
     public Rigidbody rb;
+    public HealthBar healthBar;
+    
     public float jumpSpeed = 5000f;
     public float walkSpeed;
     public float rotationSpeed;
@@ -24,6 +26,7 @@ public class MyCharacterController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         currentHealth = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
     }
 
     // Update is called once per frame
@@ -67,10 +70,13 @@ public class MyCharacterController : MonoBehaviour
         } 
        
     }
+    
+    
 
     void TakeDamage(int damage)
     {
         currentHealth -= damage;
+        healthBar.SetHealth(currentHealth);
     }
     //
 }

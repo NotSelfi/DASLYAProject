@@ -1,0 +1,23 @@
+.appPageButton {
+	position:relative;
+	bottom:1px;
+	width:25px;
+	height:25px;
+	vertical-align:middle;
+	margin-top:0px !important;
+	margin-bottom:0px !important;
+	margin-right:5px !important;
+	margin-left:2px !important;
+	border:none;
+}
+
+.appPageLnk {
+	display:inline-block;
+	width:100px;
+	height:18px;
+	vertical-align:middle;
+}
+
+#onlineHelpAppPageLnk {
+	display: none;
+}

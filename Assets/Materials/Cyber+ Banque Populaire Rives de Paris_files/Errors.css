@@ -1,0 +1,184 @@
+/**
+ * Feuille de styles du bloc des erreurs fonctionnelles et des messages informatifs
+ *
+ * @author Frï¿½dï¿½ric GILBERT
+ */
+
+
+/** conteneur de plus haut niveau */
+div.errors, div.info {
+	border: 1px solid #A51d20;
+	margin: 0 auto 20px;
+	padding: auto;
+	width: 70%;
+	float: none;
+	clear: left;
+}
+
+/** conteneur des messages d'erreurs */
+div.errors div.content, div.info div.content {
+	background-color: #ffede0;
+	color: #16181D;	
+	margin-left: 80px;
+	padding: 9px 7px;
+}
+
+/** conteneur d'un message */
+div.errors div.content span, div.info div.content span{
+	display: block;	
+	float: none;
+	margin: 0px;
+	padding: 0px;
+}
+
+/** dï¿½finition des listes de messages */
+div.errors div.content ul {
+	margin-left: 37px;
+	padding-left: 0px;
+}
+
+/** dï¿½finition de la liste principale */
+div.errors ul.main {
+	margin-top: 10px;
+}
+
+
+
+div.errors div.content ul ul{
+	list-style: none;
+	list-style-image: url("../../common/images/tiret.gif?v=R1iQdLptdLlnJ8OAIrGX7OGFkjY."); 
+}
+
+div.errors div.content ul ul ul{
+	list-style: square;
+	list-style-image:none;
+}
+
+/******************************************************
+ * Feuille de styles du bloc des erreurs techniques.
+ ******************************************************/
+
+/** conteneur de plus haut niveau */
+div#technicalError {
+	background-color: white;
+	border: 1px solid #A51d20;
+	width: 70%;
+	margin: 20px auto;
+	vertical-align: middle;
+}
+/** conteneur des messages d'erreurs */
+div#technicalError div {
+	margin-left: 80px;
+	padding: 2em;
+}
+
+
+/** Message ligne 1 */
+div#technicalError span#L1{
+	display: block;/*Pour gï¿½nï¿½rer un saut de ligne*/
+	margin-bottom: 0.5em;
+	color: #A51d20;
+}
+
+/** Message ligne 2 et ligne 3 */
+div#technicalError span#L2, div#technicalError span#L3{
+	display: block;/*Pour gï¿½nï¿½rer un saut de ligne*/
+	margin-bottom: 0;
+	color: #A51d20;
+}
+
+/******************************************************
+ * Feuille de styles du bloc des messages d'information
+ ******************************************************/
+/* Spï¿½cialisation du style commun avec div.errors*/
+
+div.info div.content{
+	min-height: 60px; /* Hack CSS pour contourner la propriï¿½tï¿½ min-height non reconnue par IE*/
+	overflow-x:hidden;
+}
+
+div.info div.content p{
+	margin-top: 5px;
+}
+
+div.info div.content em.gras {
+	font-size: 12px;
+}
+
+div.info div.content p#first{
+	margin-top: 5px;
+}
+
+div.info div.content hr {
+	margin-bottom: 15px;
+    margin-top: 20px;
+    border-bottom: 1px solid #CCCCCC;
+    margin-left: -80px;
+    margin-right: -7px;
+}
+
+div.info div.content img {
+	width: 15px;
+	padding-bottom: 7px;
+    margin-right: 7px;
+}
+
+div.info div.content img + span {
+	display: inline;
+	margin-left: 7px;
+}
+
+/*****************************************************************************************/
+/*** Spï¿½cialisation des CSS de la skin par défaut INTERNET pour     	    		   ***/
+/*****************************************************************************************/
+
+/* Boï¿½tes d'erreurs fonctionnelles et information */
+div.errors, div.info {
+    border: 1px solid #CCCCCC;
+	border-radius: 4px 4px 4px 4px;
+	/*background: -webkit-linear-gradient(bottom, #E6E6E6, #FFFFFF 25px);*/
+	/*background: -o-linear-gradient(bottom, #E6E6E6, #FFFFFF 25px);*/
+	/*background: linear-gradient(to top, #E6E6E6, #FFFFFF 25px);*/
+	/*padding: 20px;*/
+	padding: 5px 15px;
+}
+
+div.errors div.content, div.info div.content {
+    background-color: transparent !important;
+    margin-left:-1px;
+    margin-top:-1px;
+    padding-left:70px;
+}
+
+div.info div.content {
+    background-image: url("../images/message/picto_infobox.png?v=C_njwkNFKHywnXAEiTl52yFaUA4.");
+    background-repeat: no-repeat;
+    background-position: 0px 5px;
+    background-size: 60px;
+}
+
+div.errors div.content {
+    background-image: url("../images/message/picto_infobox.png?v=C_njwkNFKHywnXAEiTl52yFaUA4.");
+    background-repeat: no-repeat;
+    background-position: 0px 10px;
+    background-size: 60px;
+}
+
+/* Erreur technique */
+
+div#technicalError {
+	border: 1px solid #A51d20;
+	border-radius: 4px 4px 4px 4px;
+}
+
+div#technicalError div{
+    margin-left: -1px;
+    margin-top: -1px;
+    padding-left: 80px;
+    background-size: 60px;
+    background-image: url("../images/message/picto_infobox.png?v=C_njwkNFKHywnXAEiTl52yFaUA4.");
+    background-repeat: no-repeat;
+    background-position: 10px 10px;
+}
+
+

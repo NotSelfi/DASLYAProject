@@ -1,0 +1,533 @@
+/**
+ * Feuille de styles des tableaux
+ *
+ * @author Jean-Luc Guigne
+ */
+
+/* Alignement de cellules au centre*/
+.ctr {
+    text-align: center;
+}
+
+.ctr > * {
+    float: none;
+}
+
+/* Alignement de cellules a droite*/
+.rgt {
+    text-align: right !important;
+}
+
+/* Alignement de cellules a gauche*/
+.lft {
+    text-align: left;
+}
+
+/*Classe d'un tableau*/
+.tbl {
+    border-collapse: collapse;
+    background-color: white;
+    padding: 0px;
+    margin: 0px 0px 0px 0px;
+}
+
+/* classe image en entete - utilisee pour la selection multiple */
+.tbl th img {
+    cursor: pointer;
+    margin: 3px 0px 2px 2px;
+}
+
+/* Classe d'une entete de colonne de tableau en remplacement du lien de tri*/
+.tbl th span {
+    text-decoration: none;
+    white-space: nowrap;
+    padding-left: 11px;
+    margin: 0;
+    float: none;
+}
+
+/* Le style pour mettre en rouge l'asterique de colonne obligatoire est definie dans Field.css->.tbl th em*/
+
+/*Classe d'une entete de colonne de tableau qui contient au moins un champ en erreur*/
+.tbl th.error,
+.tbl th.error a {
+    color: #be260c !important;
+}
+
+/**
+* style sur les tableau pour avoir un alignement vertical top
+*/
+table.vatop tbody td {
+    vertical-align: top;
+}
+
+/*Classe d'une cellule de tableau masquee (cas des identifiants ne devant pas etre affiches)*/
+.tbl tbody td.msk,
+.tbl th.msk {
+    display: none;
+}
+
+.tbl th img.unmsk {
+    display: inline;
+}
+
+/* Classe d'un champ d'une cellule de tableau en mode EDIT */
+.tbl tbody td input {
+    float: none !important;
+}
+
+/* Classe d'un champ d'une cellule de pied de tableau en mode INSPECT */
+.tbl tfoot td span {
+    float: none !important;
+}
+
+/* Classe d'un champ d'une cellule de tableau en mode INSPECT */
+.tbl tbody td span {
+    float: none !important;
+}
+
+/***** Gestion de la selection des lignes ******/
+/*le tbody porte deux styles : ts si le tableau est selectionnable et tas/tss/tms selon le type de selection (active, simple ou multiple) */
+
+/*Gestion du rollover sur une cellule du tableau */
+.tbl tr.sel td a:hover {
+    text-decoration: none; /*Force la disparition du souligne au passage du curseur*/
+    color: white; /*Hack IE sans l'attribut color il ne prend pas en compte le text-decoration: none */
+}
+.tbl td a:hover {
+    text-decoration: none; /* Force la disparition du souligne au passage du curseur */
+}
+
+/*Classe d'une ligne de tableau pour le rollover de selection de ligne
+	Comme d'hab, particularite pour Mesieur IE qui ne gere pas le :hover sur des tr. necessaire de le gerer via JS (style high) */
+.tbl tbody.ts tr:hover,
+.tbl tbody.ts tr:focus,
+.tbl tbody.ts tr.high {
+    background-color: #d5e8eb;
+    text-decoration: none;
+    cursor: default;
+}
+
+/* Pour la selection simple et multiple, un clic sur la ligne la selectionne donc presente d'un changement de curseur*/
+.tbl tbody.tss tr:hover,
+.tbl tbody.tss tr:focus,
+.tbl tbody.tss tr.high,
+.tbl tbody.tss tr.sel,
+.tbl tbody.tms tr:hover,
+.tbl tbody.tms tr:focus,
+.tbl tbody.tms tr.high,
+.tbl tbody.tms tr.sel {
+    cursor: default;
+}
+
+/**Classe d'une ligne de tableau selectionnee
+	Attention l'ordre est important par rapport au style du rollover de ligne (sinon pb sur FF)*/
+.tbl tbody.ts tr.sel,
+.tbl tbody.ts tr.sel span {
+    background-color: #2f8d99;
+    color: white;
+}
+
+/* Les champs en INSPECT passent en blanc sur une ligne selectionnee*/
+.tbl tbody.ts tr.sel span,
+.tbl tbody.ts tr.sel label.rdo {
+    color: white !important;
+}
+
+/*Classe d'une cellule de pied de tableau "tft" */
+/* Style particulier "tftt" pour les cellules de pied de colonne type "titre". Identique dans cette CG a une cellule de pied de tableau
+	type "standard" */
+.tft,
+.tftt {
+    padding: 2px 2px 3px 2px;
+    vertical-align: middle;
+    text-decoration: none;
+    border: 1px #d4d8e3 solid;
+}
+
+/* Style pour les liens des selection active dans les tableaux */
+.tbl tbody td a span,
+.tbl tbody td a:visited span {
+    text-decoration: underline;
+}
+
+.tbl tbody td a:hover span {
+    text-decoration: none;
+}
+
+.tbl tbody td a p,
+.tbl tbody td a:visited p {
+    text-decoration: underline;
+    cursor: hand;
+}
+
+.tbl tbody td a:hover p,
+.tbl tbody td a:hover span {
+    text-decoration: none;
+}
+
+.tbl tbody td a:hover span {
+    cursor: hand;
+}
+
+/* Style communs des entetes de tableaux triees */
+.tbl th a {
+    white-space: nowrap;
+    text-decoration: none;
+    padding-left: 20px;
+}
+
+/* Style des entetes non triees de tableaux : par defaut, visite */
+a.tctm {
+    background-position: left center;
+    background-image: url("../images/bullets/BulletTopAndBottomTriangleBlack.png?v=g_ehiZCgVxmR94m3YOtRJeDWRVU.");
+    background-repeat: no-repeat;
+    color: #000000;
+    background-size: 10px;
+}
+
+a.tctm:link,
+a.tctm:visited {
+    text-decoration: none;
+}
+
+a.tctm:hover {
+    text-decoration: underline;
+}
+
+/* Style des entetes triees (asc) de tableaux */
+a.tcth {
+    background-position: left center;
+    background-image: url("../images/bullets/BulletTopTriangleBlack.png?v=dVwCYMWKWof-TtYL8I9HzH0p3iI.");
+    background-repeat: no-repeat;
+    color: #000000;
+}
+
+a.tcth:link,
+a.tcth:visited {
+    text-decoration: none;
+}
+
+a.tcth:hover {
+    text-decoration: underline;
+}
+
+/* Style des entetes triable en mode ascendant uniquement de tableaux */
+a.tctmh {
+    background-position: left center;
+    background-image: url("../images/bullets/BulletTopOnlyTriangleBlack.png?v=gA4iW0pdEx1gR4LJotLhJ-AMvwY.");
+    background-repeat: no-repeat;
+    color: #000000;
+}
+
+a.tctmh:link,
+a.tctmh:visited {
+    text-decoration: none;
+}
+
+a.tctmh:hover {
+    text-decoration: underline;
+}
+
+/* Style des entetes triees (desc) de tableaux */
+a.tctb {
+    background-position: left center;
+    background-image: url("../../internet/images/bullets/BulletBottomTriangleBlack.png?v=MX38_jrSjflfuqCJqqHAOcN7r04.");
+    background-repeat: no-repeat;
+    color: #000000;
+}
+
+a.tctb:link,
+a.tctb:visited {
+    text-decoration: none;
+}
+
+a.tctb:hover {
+    text-decoration: underline;
+}
+
+/* Style des entetes triees en mode descendant uniquement de tableaux */
+a.tctmb {
+    background-position: left center;
+    background-image: url("../../internet/images/bullets/BulletBottomOnlyTriangleBlack.png?v=iWE7EH8neKFL0O1-vyhqdp71dsg.");
+    background-repeat: no-repeat;
+    color: #000000;
+    background-size: 11px;
+}
+
+a.tctmb:link,
+a.tctmb:visited {
+    text-decoration: none;
+}
+
+a.tctmb:hover {
+    text-decoration: underline;
+}
+
+/* Style des entetes de colonnes de tableaux triables, ascendant, avec action de tri desactivee */
+a.tcthd {
+    background-position: left center;
+    background-image: url("../images/bullets/BulletTopTriangleBlack.png?v=dVwCYMWKWof-TtYL8I9HzH0p3iI.");
+    background-repeat: no-repeat;
+    cursor: default;
+    color: #000000;
+}
+
+a.tcthd:hover,
+a.tcthd:link,
+a.tcthd:visited {
+    text-decoration: none;
+}
+
+/* Style des entetes de colonnes de tableaux triables, descendant, avec action de tri desactivee */
+a.tctbd {
+    background-position: left center;
+    background-image: url("../../internet/images/bullets/BulletBottomTriangleBlack.png?v=MX38_jrSjflfuqCJqqHAOcN7r04.");
+    background-repeat: no-repeat;
+    cursor: default;
+    color: #000000;
+}
+
+a.tctbd:hover,
+a.tctbd:link,
+a.tctbd:visited {
+    text-decoration: none;
+}
+
+/* Style d'une selection desactivee sur une ligne donnee du tableau */
+.seldis {
+    cursor: default !important;
+}
+
+/* Style d'une image d'une cellule de tableau masquee (cas des identifiants ne devant pas etre affiches)*/
+.tbl img.msk {
+    display: none;
+}
+
+/* Styles d'un tableau borderless */
+.tborderless,
+.tborderless thead th,
+.tborderless tbody td,
+.tborderless tfoot td {
+    border: 0;
+}
+
+/* Alterner couleur sur les lignes paires et impaires*/
+.tborderless tr.even {
+    background-color: white;
+}
+.tborderless tr.odd {
+    background-color: white;
+}
+
+/*****************************************************************************************/
+/*** Specialisation des CSS de la skin par defaut INTERNET pour Internet           ***/
+/*****************************************************************************************/
+
+/************************************/
+/*** Tableaux		              ***/
+/************************************/
+
+/*Classe d'une ligne de tableau pour le rollover de selection de ligne
+	Comme d'hab, particularite pour Mesieur IE qui ne gere pas le :hover sur des tr. necessaire de le gerer via JS (style high) */
+.tbl tbody.ts tr:hover,
+.tbl tbody.ts tr:focus,
+.tbl tbody.ts tr.high {
+    background-color: #cde6fa;
+}
+/**Classe d'une ligne de tableau selectionnee.
+	Attention l'ordre est important par rapport au style du rollover de ligne (sinon pb sur FF)*/
+.tbl tbody.ts tr.sel,
+.tbl tbody.ts tr.sel span {
+    background-color: #a6a6a6;
+}
+
+.tbl {
+    background-color: transparent;
+}
+
+/**
+ * Suppression des bordures gauche et droite pour eviter le doublement des bordures avec celles des blocs
+ */
+.tbl tr {
+    border-left: 0px hidden transparent;
+    border-right: 0px hidden transparent;
+}
+
+a.tcthd,
+a.tctbd {
+    color: #014495;
+}
+
+a.tctm,
+a.tcth,
+a.tctmh,
+a.tctb,
+a.tctmb {
+    color: #014495;
+    cursor: pointer;
+}
+
+/* Styles d'un tableau borderless */
+.tborderless,
+.tborderless thead th,
+.tborderless tbody td,
+.tborderless tfoot td {
+    border: 0;
+}
+
+/* Alterner couleur sur les lignes paires et impaires*/
+.tborderless tr.even {
+    background-color: transparent;
+}
+.tborderless tr.odd {
+    background-color: transparent;
+}
+
+/* boutons inseres dans les tableaux */
+.tbl td .btn span {
+    background-color: transparent !important;
+}
+
+/* Style pour les boutons en selection active dans les tableaux */
+.tbl td a .btn span,
+.tbl td a:visited .btn span {
+    text-decoration: none;
+}
+
+.tbl td a:hover .btn span {
+    text-decoration: underline;
+}
+
+/**************************************************************
+***************************************************************
+******************         TABLE           ********************
+***************************************************************
+**************************************************************/
+
+table {
+    width: 100%;
+}
+
+/*Classe d'une entete de colonne de tableau*/
+table th {
+    font-weight: bold;
+    line-height: 105%;
+    font-size: 12px;
+    color: #080d33 !important;
+    padding: 15px 6px 10px 6px;
+    position: relative;
+}
+
+table thead {
+    background-color: #f9f9fb;
+}
+
+/* Classe d'une entete de colonne de tableau en remplacement du lien de tri*/
+table th span {
+    font-weight: bold;
+}
+
+table thead a {
+    color: #080d33 !important;
+}
+
+table tbody td {
+    padding: 15px 10px 10px 10px;
+    font-size: 12px;
+    position: relative;
+}
+
+table tbody td span {
+    font-weight: normal;
+    margin: 0 auto;
+    padding-top: 0px;
+    float: none;
+}
+
+table tbody tr {
+    border-top: 1px solid #cccccc !important;
+}
+
+table tr > *:before {
+    position: absolute;
+    content: "";
+    top: 20%;
+    left: 0;
+    height: 65%;
+    width: 1px;
+    background: #cccccc;
+    transform: translate(0%, 0);
+    margin-left: -1px;
+}
+
+table tr > *:first-child:before {
+    content: none !important;
+}
+
+table tbody td {
+    line-height: 13px;
+}
+
+table tbody td a {
+    line-height: 13px;
+    display: inline-block;
+}
+
+table a[id*="img"] {
+    float: none; /* Pas d'alignement pour éviter d'avoir une icône excentrée.*/
+}
+
+/*Classe d'une cellule de pied de tableau "tft" */
+/* Style particulier "tftt" pour les cellules de pied de colonne type "titre". Identique dans cette CG a une cellule de pied de tableau
+	type "standard" */
+.tft,
+.tftt {
+    font-weight: bold;
+}
+
+/* Style communs des entetes de tableaux triees */
+.tbl th a {
+    font-weight: bold;
+}
+
+/* DIV filtrage dynamique du tableau */
+.fdd {
+    text-align: left;
+    margin-bottom: 15px;
+    font-weight: bold;
+    line-height: 105%;
+    font-size: 12px;
+    color: #080d33;
+}
+
+/* Label filtrage dynamique du tableau */
+.fdl {
+    float: right !important;
+    line-height: 24px;
+}
+
+/* INPUTBOX filtrage dynamique du tableau */
+.fdi {
+    background: url("../images/buttons/liste-destinataire.png?v=XkRecnu4uPqIdPlRfibfjDz0EXs.") left no-repeat;
+    background-size: 1.4em;
+    text-indent: 20px;
+    background-position: 4px;
+    float: left;
+    margin-bottom: 15px !important;
+    margin-right: 0;
+    margin-left: 0;
+}
+
+.fdi::-ms-clear {
+    display: none;
+}
+
+/* sicky header du tableau scrollable */
+.sticky {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: rgb(249, 249, 251);
+    box-shadow: 0 1px 0 #cccccc;
+}

@@ -1,0 +1,63 @@
+/**
+ * Feuille de styles des tags d'agencement.
+ *
+ * @author Frédéric GILBERT
+ * @author Julien SUREAU	
+ */
+div.grid,
+div.grid > * {
+    float: left;
+}
+
+/**
+ * Séparateurs verticaux et horizontaux
+ */
+div.vertical {
+    border-right: 1px solid #81a6d0;
+    float: left;
+    width: 1%;
+}
+
+div.div-horizontal {
+    float: left;
+    width: 100%;
+}
+
+hr.horizontal {
+    border-bottom: 1px solid #81a6d0;
+    height: 1px;
+    margin-bottom: 7px;
+    margin-left: auto;
+    margin-top: 5px;
+    margin-right: auto;
+    width: 90%;
+}
+
+div.none {
+    float: left;
+    width: 1%;
+}
+
+/**
+ * A l'impression, les propriétés padding-top:100% et margin-bottom:-100% 
+ * provoque un bug avec dépassement de page. On les désactive
+ * 
+ * Bug observé sur les tableaux filtrables dynamiques lorsque l'on joue avec le filtre 
+ */
+@media print {
+    .vsep {
+        padding-top: revert !important;
+        margin-bottom: revert !important;
+    }
+}
+
+.vsep {
+    width: 1px;
+    height: auto;
+    float: left;
+    padding-top: 100%;
+    margin-right: 15px;
+    margin-bottom: -100%;
+    margin-left: 15px;
+    border-right: 1px solid #cccccc;
+}

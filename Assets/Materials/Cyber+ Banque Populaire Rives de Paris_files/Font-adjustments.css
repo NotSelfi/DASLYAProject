@@ -1,0 +1,428 @@
+/******************************************************************************/
+/***  Spécialisation des CSS afin de rectifier des problémes                 **/
+/***  d'agencement liés au changement de la police  pour Internet          **/
+/***                                                                         **/
+/***  Cette feuille devra être intégrée aux feuilles de styles existantes    **/
+/***  lors du passage complet à Internet.                                  **/
+/******************************************************************************/
+@font-face {
+    font-family: 'Ubuntu-Bold';
+    src: url('../Font/Ubuntu-Bold.eot?v=eTszREmWxmFAprdD69lKHHswVds.'); /* IE9 Compat Modes */
+    src: local('Ubuntu Bold'), local('Ubuntu-Bold'),
+         url('../Font/Ubuntu-Bold.eot?v=eTszREmWxmFAprdD69lKHHswVds.#iefix') format('embedded-opentype'),  
+         url('../Font/Ubuntu-Bold.woff2?v=OFQfE5GYJlbYRvCpkUa7gh8HchQ.') format('woff2'), 
+         url('../Font/Ubuntu-Bold.woff?v=5zH4X09v8--cpuWSa2zGDKIor0U.') format('woff'), 
+         url('../Font/Ubuntu-Bold.ttf?v=5QExJ3i__24AGirUYQobRUxSREM.') format('truetype'), 
+         url('../Font/Ubuntu-Bold.svg?v=sMvlGivHof0MjHn9T3EZO5uhchA.#Ubuntu-Bold') format('svg'); /* Legacy iOS */
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "ubuntu";
+    src: url('../Font/Ubuntu-Light.eot?v=DAgTlIc6RmX8VPAQvUyhbtVEw5E.'); /* IE9 Compat Modes */
+    src: local('Ubuntu Light'), local('Ubuntu-Light'),
+        url('../Font/Ubuntu-Light.eot?v=DAgTlIc6RmX8VPAQvUyhbtVEw5E.#iefix') format('embedded-opentype'), 
+        url('../Font/Ubuntu-Light.woff2?v=y_lhBAX1FULsI9La3P4j0ELmjPU.') format('woff2'), 
+        url('../Font/Ubuntu-Light.woff?v=CDjHrOYJfrai-EJbbwFYeqFuRD4.') format('woff'), 
+        url('../Font/Ubuntu-Light.ttf?v=X4jwfWHLY-Bl9WXDrOj9EjlOBxs.') format('truetype'), 
+        url('../Font/Ubuntu-Light.svg?v=RxY7HGOAw7wXotuEn8I8CAJDiV4.#Ubuntu-Light') format('svg'); /* Legacy iOS */
+    font-stretch: normal;
+    font-style: normal;
+}
+
+* {
+	font-family: "ubuntu", Helvetica, Arial, sans-serif;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+/***************************/
+/**   Titre de niveau 0   **/
+/***************************/
+div.b0 .btit{
+	line-height:115%;
+	
+}
+
+
+/***************************/
+/**   Titre de niveau 1   **/
+/***************************/
+/*Alignement vertical d de la zone de filtre de niveau 1      */
+div.b0 div.b1 div.bfil {
+}
+
+
+
+/*Alignement vertical d'un label d'un champ select de la zone de filtre */
+/*de niveau 1                                                           */
+div.bfil div.default label.select{
+	margin-top:2px;
+	margin-bottom:2px;
+	height:auto;
+	padding-top:1px;
+}
+
+/*Rï¿½glage de la hauteur d'un champ select de la zone de filtre de niveau 1*/
+div div.b1 div.bfil select{
+	height:1.6em;
+    padding-left: 3px;
+}
+
+/* Rï¿½glage de l'alignement vertical et de la hauteur    */
+/* de la zone de titre de niveau 1                     */
+div.b0 div.b1 .btit,body div.b1 div.btit{
+	padding-top:3px;
+	padding-bottom:1px;
+	line-height:normal;
+	height:auto;
+}
+
+
+
+
+/*Rï¿½glage de l'alignement vertical des labels radios de la zone de filtre*/
+div.b1 div.bfil label.rdo{
+	line-height:140%;
+}
+
+/*Rï¿½glage de l'alignement vertical des radios de la zone de filtre*/
+div.b1 div.bfil input.rdo{
+	position:relative;
+	top:0px;
+}
+
+/***************************/
+/**   Titre de niveau 2   **/
+/***************************/
+/*Rï¿½glage de la hauteur et l'alignement vertical de la zone de titre*/
+div.b0 div.b1 div.bb .btit,
+body div.b1 div.bb div.btit,
+div.b0 div.b1 div.b2 .btit,
+body div.b1 div.b2 div.btit{
+	padding-bottom:3px;
+	padding-top:2px;
+	height:auto;
+	line-height:13px;
+	margin-bottom:-1px;
+}
+
+div.b0 div.b1 div.bb .bfil select,
+body div.b1 div.bb div.bfil select,
+div.b0 div.b1 div.b2 .bfil select,
+body div.b1 div.b2 div.bfil select{
+	margin-top:1px;
+}
+
+/* Les titres de niveau 2 avec une bordure en dessous doivent ï¿½tre alignï¿½s*/
+/* diffï¿½rement.*/
+div.b0 div.b1 div.b2 .btit,
+body div.b1 div.b2 div.btit{
+	padding-bottom:0px;
+	padding-top:5px;
+}
+/*Rï¿½glage de l'alignement vertical de la zone de filtre*/
+div.b0 div.b1 div.bb .bfil,
+body div.b1 div.bb div.bfil,
+div.b0 div.b1 div.b2 .bfil,
+body div.b1 div.b2 .bfil{
+	padding-top:1px;
+	padding-bottom:0px;
+}
+
+div.b1 div.b2 div.b2titcnt {
+	height: 1.5em;
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+
+/***************************/
+/**  Champs de formulaire **/
+/***************************/
+
+/*Rï¿½glage de la taille des selects*/
+div div.required select,
+div div.default select{
+	height: 1.8em;
+}
+
+/*Rï¿½glage de l'alignement vertical des selects*/
+div div.required select,
+div div.default select{
+	margin-bottom:1px;
+	padding: 5px;
+	padding-right: 15px;
+	height: auto;
+	border-color: #cccccc;
+	border-radius: 5px;
+	background-color: #f8f9fb;
+}
+
+table.tbl tr td.default select {
+	min-width:50px;
+}
+
+/*Rï¿½glage de l'alignement vertical des champs de saisie*/
+div div.default input,
+div div.required input
+{
+	height:17px;
+ 	padding-top:1px;
+	padding-bottom:1px;
+}
+
+
+div div.default input, div div.required input, table.tbl tr td.required input, table.tbl tr td.default input {
+    padding-top: 0px;
+    padding-bottom: 0px;
+    line-height: 17px;
+	margin-bottom:1px;
+	padding: 5px;
+	height: auto;
+	border-color: #cccccc;
+	border-radius: 5px;
+	background-color: #f8f9fb;
+}
+
+
+/*Rï¿½glage de l'alignement vertical des champs de saisie de tableaux*/
+td.required input, 
+td.default input {
+	margin-bottom:1px;
+}
+
+/*Rï¿½glage de l'alignement vertical des champs checkbox et radio*/
+div div.default input.cbx, 
+div div.default input.rdo{
+	position:relative;
+	top:4px;
+}
+
+/*Rï¿½glage de l'alignement vertical des champs checkbox et radio dans les tableaux*/
+div div.default  td.default input.rdo{
+	position:relative;
+	top:0px;
+}
+
+
+td.default input.cbxTab, td.error input.cbxTab, td.required input.cbxTab {
+	display:block;
+}
+
+td.ctr input.cbxTab  {
+    width:13px;
+    margin:auto;
+}
+
+/*Rï¿½glage de l'alignement vertical des zones de texte*/
+/*Le line-height permet de rï¿½duire l'interligne     */
+div div.default textarea,div div.required textarea{
+	padding-top:3px;
+	padding-bottom:0px;
+	line-height:13px;
+	padding: 5px;
+	height: auto;
+	border-color: #cccccc;
+	border-radius: 5px;
+}
+
+
+
+/*Rï¿½glage de la taille des lignes de rendu de totaux*/
+.tbl tfoot td.tft span{
+	line-height:13px;
+	display: inline-block;
+	margin-bottom: 0px;
+	margin-top: 0px;
+	height:13px;
+}
+
+/*Rï¿½glage de la taille des lignes de rendu de totaux*/
+.tbl tfoot td.tft {
+	line-height:13px;
+}
+
+/* Unitï¿½ d'un nombre en mode INSPECT dans une cellule de tableau*/
+/* Suppression des marges pour rï¿½duire la taille des colonnes de tableau */
+td.default span.iunit{
+	margin: 0px 2px;
+}
+
+/*Rï¿½glage de la hauteur des labels et des span d'unitï¿½ de mesure*/
+/*afin de ramener leur hauteur par dï¿½faut de 16px ï¿½ 13px        */ 
+div div.default span.iunit, 
+div div.default span.unit,
+div div.error span.unit, 
+div div.required span.uni {
+	height:auto;
+}
+
+
+div.default, div.required{
+	line-height:19px;
+}
+
+/*Span contenant du contenu sur plusieurs lignes    */
+/*Le line-height permet de rï¿½duire l'interligne     */
+div.default label, 
+div div.default label.select, 
+div div.default label.rdo, 
+div div.default label.insp, 
+div div.required label, 
+div.default span{
+	height:auto;
+	font-size: 12px;
+}
+
+/*Alignement vertical des labels    */
+div.default label, 
+div div.default label.select, 
+div div.default label.rdo, 
+div div.default label.insp, 
+div div.required label, 
+div.default span{
+	padding-top:1px;
+}
+
+/*Paragraphe contenant les notes en bas de pages    */
+/*Le line-height permet de rï¿½duire l'interligne     */
+p.cpt{
+	line-height:13px;
+}
+
+/*Paragraphes de zone d'info  et balises contenues  */
+/*Le line-height permet de rï¿½duire l'interligne     */
+div.info div.content p, 
+div.info div.content p em.color, 
+div.info div.content p em.gras, 
+div.info div.content p a.link,
+div.info div.content ul li, 
+div.info div.content ul li em {
+	line-height: 12px;
+}
+
+div.info div.content p#first, 
+div.info div.content p#first em.color, 
+div.info div.content p#first em.gras, 
+div.info div.content p#first a.link {
+	/*line-height: 13px;*/
+	line-height: 17px;
+}
+
+/*Paragraphes de zone d'erreur et balises contenues  */
+/*Le line-height permet de rï¿½duire l'interligne     */
+div.errors div.content span,
+div.info div.content span {
+    line-height: 13px;
+}
+
+div.errors div.content span.esl,
+div.info div.content span.esl,
+div.errors div.content ul li {
+    line-height: 12px;
+}
+
+/* Alignement vertical et dimensionnement de la barre de navigation */
+/* sous les tableaux                                                */
+ol.nav{
+	
+}
+div ol.nav li{
+	height:35px;
+	margin-top:0px;
+	margin-bottom:0px;
+}
+
+div ol.nav li a{
+	display:block;
+	height:100%;
+	width: 100%;
+	margin-top:0px;
+	margin-bottom:0px;
+	padding-top:0px;
+	padding-bottom:0px;
+}
+
+ol.nav li.pnb{
+	font-size: 12px;
+	width: 2.4em;
+	height: 15px;
+	padding-top: 7px;
+	margin-top: 0px;
+	position: relative;
+	top: -14px;
+}
+
+/************************************/
+/**  Popup de sï¿½lection d'une date **/
+/************************************/
+
+
+
+/*Rï¿½duction de la hauteur des cellules du tableau de sï¿½lection de dates.*/
+div#calBody tbody td.caldaywe,
+div#calBody tbody td.caldaywe_high,
+div#calBody tbody td.calday,
+div#calBody tbody td.calday_high,
+div#calBody tbody td.calday_sel, 
+div#calBody tbody td.caldaywe_sel{
+	line-height: 13px;
+}
+
+/*Correction d'un problï¿½me d'alignement entre la ligne contenant */
+/* les libellï¿½s jours de la semaines et le tableau des jours     */
+div#calDaysBdy {
+    margin-left:-1px;
+}
+/***************************/
+/**  Banniï¿½re de pub haute**/
+/***************************/
+/*Rï¿½duction de la marge car elle est augmentï¿½e automatiquement */
+/*suite au changement de police*/
+div.tbanner{
+	margin-bottom: 3px;
+}
+
+div.banner{
+	line-height:13px;
+}
+/***************************/
+/**       Boutons         **/
+/***************************/
+/*On est obligï¿½ de re-specifier la taille de police */
+/*car l'hï¿½ritage ne se fait pas correctement*/
+/* div button.btn, */ 
+.btn, 
+.btn.high, 
+.btn.sel, 
+.btn:hover, 
+.btn:focus,
+.btn.dis, 
+.btn.dis:hover, 
+.btn.dis.high:hover {
+	font-size:12px;
+	padding: 10px;
+	border-radius: 5px;
+}
+
+
+/* --------------- custom css --------------- */
+
+#appPageToolsArea #printAppPageLnk, #appPageToolsArea #onlineHelpAppPageLnk{
+	font-size: 12px !important;
+	font-weight: normal;
+}
+.tbl tbody td.default.ctr{
+    padding: 10px;
+	font-size: 12px;
+}
+
+/* Class CSS d'une tuile */
+.tile {
+	margin: 2px;
+	text-align: left;
+	background-color: #FFFFFF;
+	border: 1px solid #0056b3;
+}

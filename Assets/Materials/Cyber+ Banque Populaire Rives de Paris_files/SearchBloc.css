@@ -1,0 +1,45 @@
+/**
+ * Feuille de styles du bloc de recherche de la télécommande.
+ *
+ * @author Jean-Luc Guigné
+ */
+
+/** La div du bloc de recherche*/
+#searchPanel{
+	margin: 5px 3px 0px 5px;
+}
+
+/** Le champ de saisie de critères de recherche*/
+#sc{
+	border: 1px #81A6D0 solid; 
+	padding : 0px 1px 1px 1px;
+	margin: 0px;
+}
+
+/* Bouton*/
+.btn,.btn:active, .btn:visited{
+	background-color: #00A6EB;
+}
+
+/* Spécification de la visualisation du text d'un bouton */
+.btn .btntxt {
+	color: white;
+	text-decoration: none;
+}
+
+/* Bouton survolé */
+.btn.high, .btn:hover, .btn:focus{
+	background-color: #00A6EB;
+	cursor: pointer;
+}
+
+/* Bouton survolé */
+.btn.high span.btntxt, .btn:hover span.btntxt, .btn:focus span.btntxt{
+	text-decoration: underline;
+}
+
+/** Le bouton de lancement de la recherche*/
+#go{
+	margin: 0px 1px 0px 0px;
+	padding-bottom: 1px;
+}

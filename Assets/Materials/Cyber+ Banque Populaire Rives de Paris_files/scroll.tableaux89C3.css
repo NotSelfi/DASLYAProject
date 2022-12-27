@@ -1,0 +1,23 @@
+
+.tableScroll {
+  overflow-y: auto;
+  width: 100%!important;
+}
+
+.tableScroll table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.tableScroll th,
+.tableScroll td {
+  padding: 8px 16px;
+}
+
+.tableScroll th {
+  position: sticky;
+  top: 0;
+  background: #f9f9fb;
+  opacity: 100%;
+  z-index:10000;
+}

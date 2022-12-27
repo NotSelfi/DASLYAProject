@@ -1,0 +1,176 @@
+/**
+ * Feuille de styles des liens, boutons ...
+ */
+
+/* Specification de la visualisation d'un bouton d'action.  
+ *	Heritage de propriete communes pour ses differents etat : survole(.high), selectionne(.sel), desactive (.dis), avec image (img, imgva)
+ */
+.btn, .btn.high, .btn.sel, .btn.dis {
+	background-color: #051B71;
+	text-align: center;
+	padding: 2px 1px;
+	font-size: 11px;
+}
+
+.btn .btntxt {
+	padding: 0px 6px;
+	color: white;
+	text-decoration: none;
+	margin: 0pt;
+	float: none;
+}
+
+/** Specialisation du rendu graphique selon l'etat du bouton */
+
+/* Bouton survole */
+.btn.high, .btn:hover, .btn:focus {
+	background-color: #0056b3;
+	cursor: pointer;
+}
+
+/* Tuile survole */
+.tile.high, .tile:hover, .tile:focus {
+	background-color: #f9f9fb;
+}
+
+/* Tuile survole */
+.tile.high span, .tile:hover span, .tile:focus span {
+	color: #0056b3;
+}
+
+/* Bouton survole */
+.btn.high .btntxt, .btn:hover .btntxt, .btn:focus .btntxt {
+	text-decoration: underline;
+}
+
+/* Tuile survole */
+.tile.high .btntxt, .tile:hover .btntxt, .tile:focus .btntxt {
+	text-decoration: none;
+}
+
+/* Bouton desactive*/
+.btn.dis, .btn.dis:hover, .btn.dis:hover .btntxt {
+	color: white;
+	background-color: #D3D3D3;
+	text-decoration: none;
+	cursor: default;
+}
+
+/* Bouton desactive*/
+.btn.dis .btntxt {
+	color: white;
+}
+
+/* Class CSS de l'image dans le bouton*/
+.btn .btnimg {
+	vertical-align: top;
+	margin: 0px;
+	border: 0px;
+}
+
+/*
+ * Bouton avec image uniquement
+ */
+
+.btnico, .btnico.high, .btnico.sel, .btnico-dis {
+	background-color: transparent;
+	vertical-align: middle;
+	margin: 0px;
+	padding: 0px;
+	cursor: pointer;
+}
+
+.btnico-dis {
+	cursor: default;
+}
+
+button.btnico, button.btnico.high, button.btnico.sel, button.btnico-dis {
+	
+}
+
+/* Bouton avec image (classe d'extension de .btn)*/
+.wimg {
+	
+}
+
+/*
+ * Boutons speciaux.
+ */
+
+/* bouton de recherche multicritere */
+.btnsearch, .btnsearch-high, .btncreate, .btncreate-high {
+	vertical-align: middle;
+	margin: 4px 2px 2px 0px;
+	width: 12px;
+	height: 12px;
+	cursor: pointer;
+}
+
+.tlwiz {
+	vertical-align: top;
+	margin-top: 2px;
+}
+
+/* mode recherche */
+.btnsearch {
+	background: url("../images/buttons/wiz-search.gif?v=81lsRED3rLI0oDswQ2tN-4zfcpA.") no-repeat 0 0;
+}
+
+.btnsearch-high {
+	background: url("../images/buttons/wiz-search_highlighted.gif?v=LjLykNPkJqbeh0rtTzxvL1HfVUY.") no-repeat 0 0;
+}
+
+/* mode create */
+.btncreate {
+	background: url("../images/buttons/wiz-create.gif?v=7j3KBRjMZeTv1EAfakn329GHds0.") no-repeat 0 0;
+}
+
+.btncreate-high {
+	background: url("../images/buttons/wiz-create_highlighted.gif?v=YskrtliZi_KzZ-pkdkwDjsmNx5s.") no-repeat 0 0;
+}
+
+/* Specification de la visualisation d'un bouton d'aide en ligne.  */
+.btnhlp {
+	margin-left: 10px;
+	cursor: pointer;
+}
+
+/* Lien de couleur vert */
+.btngreen {
+	color: #398538 !important;
+}
+
+/* Lien de couleur rouge */
+.btnred {
+	color: #e91b06 !important;
+}
+
+
+/* INTERNET V2 */
+
+/**
+ * Feuille de styles des liens, boutons ...
+ */
+
+
+/* mode recherche */
+.btnsearch {
+	background: url("../images/buttons/liste-destinataire.png?v=XkRecnu4uPqIdPlRfibfjDz0EXs.") no-repeat 0 0;
+	background-size: 12px;
+}
+.btnsearch-high {
+	background: url("../images/buttons/liste-destinataire_highlighted.png?v=XkRecnu4uPqIdPlRfibfjDz0EXs.") no-repeat 0 0;
+	background-size: 12px;
+}
+
+/* mode create */
+.btncreate {
+	background: url("../images/buttons/ajouter-destinataire.png?v=LHh25AhRBxoikiJYv__0zu0yMiM.") no-repeat 0 0;
+	background-size: 12px;
+}
+.btncreate-high {
+	background: url("../images/buttons/ajouter-destinataire_highlighted.png?v=LHh25AhRBxoikiJYv__0zu0yMiM.") no-repeat 0 0;
+	background-size: 12px;
+}
+
+

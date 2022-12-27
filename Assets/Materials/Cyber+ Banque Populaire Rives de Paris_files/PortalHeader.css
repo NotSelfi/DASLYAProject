@@ -1,0 +1,139 @@
+.homepage {
+    width: 980px;
+    max-width: 980px;
+    margin: 0 auto;
+}
+
+.bp-logo img {
+    padding-top: 5px;
+    cursor : pointer;
+}
+
+
+
+.nav {
+    border-bottom: 1px solid lightgrey;
+    border-top: 1px solid lightgrey;
+    /* padding: 18px 0 18px;*/
+
+}
+
+.bp-login__button {
+    height: 60px;
+    width: 221px;
+    border: none;
+    padding: 15px 24px;
+    background: #051B71;
+    color: #fff;
+    font-size: 18px;
+}
+
+.bp-login__button:hover {
+    background-color: #0056b3
+}
+
+.nav-link {
+    color: #333333;
+    font-size: 18px;
+    line-height: 21px;
+    padding: 16px 1rem;
+    font-weight : 600 !important;
+    float:left;
+}
+
+.nav-link:hover {
+	cursor : pointer;	
+}
+
+#trait_dessus {
+    border-top: 1px outset;
+    height: 20px;
+}
+
+li.nav-item {
+    padding: 0 0.5rem;
+    position: relative;
+}
+
+li.nav-item .active {
+    border-bottom: 4px solid #051B71;
+}
+
+li.nav-item:last-child a {
+    border-right: 0px
+}
+
+i.picto {
+    margin-left: 29px;
+}
+
+
+.img-temp {
+    width: 100%;
+    height: 900px;
+}
+
+.nav-item .nav-link:hover {
+    text-decoration: none !important;
+    color: #0056b3 !important;
+    cursor : pointer;
+}
+
+a#logoLink {
+	text-align : center;
+}
+
+ul.nav li a img {
+	vertical-align: middle;
+    margin: 0 5px 3px;
+    height: 16px;
+    width: 16px;
+}
+
+li.nav-item:not(:last-child) .nav-link:before {
+    position: absolute;
+    content: '';
+    top: 32%;
+    right: 0;
+    height: 30%;
+    width: 1px;
+    background: lightgrey;
+}
+
+.bp-login_turbo {
+	height: 60px;
+}
+
+.bp-login_turbo:hover {
+	cursor : pointer;
+}
+
+/*DIV englobante dans le LightPortalHeader*/
+#global {
+	min-width: 790px;
+	position: absolute;
+	left: 0px;
+	width: 100%;
+	height: 120px;
+	float: none;
+	text-align: center;
+	z-index: -1;
+	background: url("../../internet/images/header/Tetiere.png?v=5p8AV64w1ZLb74SOqY2RICRBAW0.") repeat-x scroll center top transparent;
+}
+
+#global.relative {
+	position: relative;
+}
+
+#global #cyberPlus {
+    float: right;
+    padding-top: 30px;
+    padding-right: 15px;
+    color: #083995;
+}
+#global #logo {
+    position: absolute;
+    left: 15px;
+    top: 15px;
+    z-index: 1;
+}

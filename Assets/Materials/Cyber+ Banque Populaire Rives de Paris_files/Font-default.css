@@ -1,0 +1,16 @@
+/**
+ * Définition des polices par défaut.
+ *
+ * @author Benjamin FONTAINE
+ */
+html {
+	font-family: "Trebuchet MS", Arial, Verdana, sans-serif;
+	font-style: normal;
+	font-size : 11px ;
+	
+}
+
+input, select, textarea{
+	font-size: 	11px;
+	font-family:  "Trebuchet MS", Arial, Verdana, sans-serif;
+}

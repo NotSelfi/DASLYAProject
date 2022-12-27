@@ -1,0 +1,201 @@
+.imgFiltreTable {
+	height: 13px;
+	margin:1px 3px 3px 5px !important;
+	vertical-align: middle;
+}
+
+tr.emptyLine > td{
+	text-align: center;
+}
+
+
+/* Suppression de la croix de réinitialisation des champs dans IE */
+.searchable-select-input::-ms-clear {
+    display: none;
+}
+
+.searchable-select-hide {
+  display: none;
+}
+
+.searchable-select {
+  display: inline-block;
+
+
+  vertical-align: middle;
+  position: relative;
+  padding-left:0px;
+  height: 1.8em;
+  margin-bottom: 3px;
+ 
+  
+}
+
+.searchable-select-holder{
+  padding: 1px;
+  padding-left: 5px;
+  padding-right: 15px;
+  background-image : url(../../../../../../../ibp/ate/skin/internet/images/bullets/BulletBottomTriangleBlack.png);    
+  background-position : calc(100% - 5px);
+  background-repeat: no-repeat;
+  background-color: white;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 5px;
+  border-color: #cccccc;
+   
+  
+  
+  
+}
+.required .searchable-select-holder{
+
+ /*background-color: #F1EDE7;*/
+}
+
+.searchable-select-caret {
+	display:none;
+  
+}
+
+
+
+.searchable-select-dropdown {
+  position: absolute;
+  min-width:max-content;
+  background-color: #fff;
+  border: 1px solid #ccc;
+ 
+  padding: 6px;
+  padding-top: 8px;
+  padding-right: 0px;
+  border-top: none;
+  margin-top:15px;
+  top: 5px;
+  left: 0px;
+  right: 0px;
+  z-index: 100000;
+}
+
+.searchable-select-input {
+  margin-top: 1px;
+  border: 1px solid #ccc;
+  outline: none;
+  padding: 0px;
+  box-sizing: border-box;
+  width: 95%;
+  
+}
+
+.searchable-scroll {
+  margin-top: 4px;
+  position: relative;
+}
+
+.searchable-scroll.has-privious {
+  padding-top: 16px;
+  
+}
+
+.searchable-scroll.has-next {
+  padding-bottom: 16px;
+}
+
+.searchable-has-privious {
+  top: 0;
+  background-image : url(../../../../../../../ibp/ate/skin/internet/images/bullets/BulletTopTriangleBlack.png);    
+  background-position : calc(50% - 10px);
+  background-repeat: no-repeat;
+  background-color: white;
+  color : transparent;
+}
+
+.searchable-has-next {
+  bottom: 0;
+  background-image : url(../../../../../../../ibp/ate/skin/internet/images/bullets/BulletBottomTriangleBlack.png);    
+  background-position : calc(50% - 10px);
+  background-repeat: no-repeat;
+  background-color: white;
+  color : transparent;
+}
+
+.searchable-has-privious, .searchable-has-next {
+  height: 16px;
+  left: 0;
+  right: 0;
+  position: absolute;
+  text-align: center;
+  z-index: 10;
+  background-color: white;
+  line-height: 8px;
+  cursor: pointer;
+}
+
+.searchable-select-items {
+  max-height: 230px;
+  overflow-y: scroll;
+  position: relative;
+  scrollbar-width: none;
+  -ms-overflow-style:none;
+}
+
+.searchable-select-items::-webkit-scrollbar {
+  display: none;
+}
+
+.searchable-select-item {
+  padding: 5px 3px;
+  cursor: pointer;
+  min-height: 15px;
+  box-sizing: border-box;
+}
+
+.searchable-select-item.hover {
+  background: #417dd6;
+  color: white;
+}
+
+.searchable-select-item.selected {
+  background: #009dde;
+  color: white;
+}
+
+.error .searchable-select-holder {
+ 	border: 1px solid #db522b !important;
+}
+
+/*************** RECHERCHE DYNAMIQUE TABLEAU ********************/
+
+.searchFieldTable{
+     /*  pour plus tard pour aligner à droite */
+     /* float:right ! important; */
+       
+}
+.inputValFiltreTable {
+    background: white url(images/search-for-icon.jpg) left no-repeat;
+    background-size: 1.4em;
+    background-position: 2px;
+    padding-left: 1.6em ! important;
+    
+}
+
+/* Suppression de la croix de réinitialisation des champs dans IE */
+.inputValFiltreTable::-ms-clear {
+    display: none;
+}
+.inputValFiltreTable{
+	
+	background: white url(images/search-for-icon.jpg) left no-repeat;
+	background-size: 1.2em;
+	background-position: 2px ;
+	margin:4px !important;
+    padding-left: 1.5em ! important;
+    padding-top : 1px !important;
+    padding-bottom : 1px !important;
+    min-height:25px;
+    
+}
+.imgFiltreTable{
+	 display: none;
+}
+

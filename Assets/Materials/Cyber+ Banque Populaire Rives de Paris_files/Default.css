@@ -1,0 +1,41 @@
+/**
+ * Definition des styles par defaut
+ *
+ * @author Jean-Luc Guigne
+ */
+
+/* Police par defaut */
+* {
+	/*[JLG - 16/09/2010 - FIC 06099] supression de la couleur par defaut pour accepter l'imbrication des balises <bold> dans <color>  
+	 dans les decorations de message (seule l'imbrication inverse fonctionne sans cela) */
+	/*color: #4D4D4D;*/
+	margin: 0;
+	padding: 0;
+	border:0 ;
+}
+
+/*Les tags ancres sont utilises de maniere intensives pour implementer des widgets (boutons, telecommande, ...) */
+a:link, a:visited, a:active  {
+	color: #051B71;
+	text-decoration: none;
+}
+a:hover {
+	color: #4D4D4D;
+	text-decoration: underline;
+}
+/* Visualisation des hyperliens "classiques", i.e "soulignes dans le texte"*/
+a.link:link, a.link:visited, a.link:active  {
+	text-decoration: underline;
+}
+a.link:hover {
+	text-decoration: none;
+}
+
+ul {
+	list-style-image: none;
+}
+
+body {
+	background-color: white;
+}
+

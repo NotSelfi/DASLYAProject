@@ -1,0 +1,93 @@
+@CHARSET "ISO-8859-1";
+
+@font-face {
+    font-family: 'Ubuntu-Bold';
+    src: url('../Font/Ubuntu-Bold.eot?v=eTszREmWxmFAprdD69lKHHswVds.'); /* IE9 Compat Modes */
+    src: local('Ubuntu Bold'), local('Ubuntu-Bold'),
+         url('../Font/Ubuntu-Bold.eot?v=eTszREmWxmFAprdD69lKHHswVds.#iefix') format('embedded-opentype'),  
+         url('../Font/Ubuntu-Bold.woff2?v=OFQfE5GYJlbYRvCpkUa7gh8HchQ.') format('woff2'), 
+         url('../Font/Ubuntu-Bold.woff?v=5zH4X09v8--cpuWSa2zGDKIor0U.') format('woff'), 
+         url('../Font/Ubuntu-Bold.ttf?v=5QExJ3i__24AGirUYQobRUxSREM.') format('truetype'), 
+         url('../Font/Ubuntu-Bold.svg?v=sMvlGivHof0MjHn9T3EZO5uhchA.#Ubuntu-Bold') format('svg'); /* Legacy iOS */
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "ubuntu";
+    src: url('../Font/Ubuntu-Light.eot?v=DAgTlIc6RmX8VPAQvUyhbtVEw5E.'); /* IE9 Compat Modes */
+    src: local('Ubuntu Light'), local('Ubuntu-Light'),
+        url('../Font/Ubuntu-Light.eot?v=DAgTlIc6RmX8VPAQvUyhbtVEw5E.#iefix') format('embedded-opentype'), 
+        url('../Font/Ubuntu-Light.woff2?v=y_lhBAX1FULsI9La3P4j0ELmjPU.') format('woff2'), 
+        url('../Font/Ubuntu-Light.woff?v=CDjHrOYJfrai-EJbbwFYeqFuRD4.') format('woff'), 
+        url('../Font/Ubuntu-Light.ttf?v=X4jwfWHLY-Bl9WXDrOj9EjlOBxs.') format('truetype'), 
+        url('../Font/Ubuntu-Light.svg?v=RxY7HGOAw7wXotuEn8I8CAJDiV4.#Ubuntu-Light') format('svg'); /* Legacy iOS */
+    font-stretch: normal;
+    font-style: normal;
+}
+
+* {
+	box-sizing: border-box;
+	font-family: "ubuntu", Helvetica, Arial, sans-serif;
+}
+
+html, body{
+	height:100%;
+}
+
+strong {
+    font-family: "Ubuntu-Bold", Helvetica, Arial, sans-serif;
+}
+
+body#mock {
+	font-size: 11px;
+	color: #676767;
+	background-color: #FFFFFF;
+}
+
+div#welcomeZone {
+    width: 100%;
+    position: relative;
+    float: left;
+    margin-bottom: 15px;
+}
+
+div#cyberFrame{
+	width:980px;
+	margin:0px auto;
+}
+
+#mock div a,#mock div a:link,#mock div a:visited{
+    text-decoration: none !important;
+}
+
+#mock div a:hover{
+    text-decoration: underline !important;
+}
+
+iframe#iframeEQX{
+	padding:0px;
+	margin:0px ;
+	overflow:auto;
+	width:980px ;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+.clear {
+	clear: both;
+	float: none !important;
+}
+
+.container {
+    min-width: 980px;
+    max-width: 980px;
+    padding-right: 0;
+    padding-left: 0;
+}
+
+#header {
+    width: 100%;
+    float: left;
+    position: relative;
+}

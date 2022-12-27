@@ -1,0 +1,102 @@
+/**
+ * Définition des styles spécifiques à la télécommande.
+ *
+ * @author David FERRAND
+ */
+/* 
+ * Conteneur de la télécommande 
+ */
+ 
+@font-face {
+    font-family: 'Ubuntu-Bold';
+    src: url('../Font/Ubuntu-Bold.eot?v=eTszREmWxmFAprdD69lKHHswVds.'); /* IE9 Compat Modes */
+    src: local('Ubuntu Bold'), local('Ubuntu-Bold'),
+         url('../Font/Ubuntu-Bold.eot?v=eTszREmWxmFAprdD69lKHHswVds.#iefix') format('embedded-opentype'),  
+         url('../Font/Ubuntu-Bold.woff2?v=OFQfE5GYJlbYRvCpkUa7gh8HchQ.') format('woff2'), 
+         url('../Font/Ubuntu-Bold.woff?v=5zH4X09v8--cpuWSa2zGDKIor0U.') format('woff'), 
+         url('../Font/Ubuntu-Bold.ttf?v=5QExJ3i__24AGirUYQobRUxSREM.') format('truetype'), 
+         url('../Font/Ubuntu-Bold.svg?v=sMvlGivHof0MjHn9T3EZO5uhchA.#Ubuntu-Bold') format('svg'); /* Legacy iOS */
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "ubuntu";
+    src: url('../Font/Ubuntu-Light.eot?v=DAgTlIc6RmX8VPAQvUyhbtVEw5E.'); /* IE9 Compat Modes */
+    src: local('Ubuntu Light'), local('Ubuntu-Light'),
+        url('../Font/Ubuntu-Light.eot?v=DAgTlIc6RmX8VPAQvUyhbtVEw5E.#iefix') format('embedded-opentype'), 
+        url('../Font/Ubuntu-Light.woff2?v=y_lhBAX1FULsI9La3P4j0ELmjPU.') format('woff2'), 
+        url('../Font/Ubuntu-Light.woff?v=CDjHrOYJfrai-EJbbwFYeqFuRD4.') format('woff'), 
+        url('../Font/Ubuntu-Light.ttf?v=X4jwfWHLY-Bl9WXDrOj9EjlOBxs.') format('truetype'), 
+        url('../Font/Ubuntu-Light.svg?v=RxY7HGOAw7wXotuEn8I8CAJDiV4.#Ubuntu-Light') format('svg'); /* Legacy iOS */
+    font-stretch: normal;
+    font-style: normal;
+}
+
+* {
+	box-sizing: border-box;
+	font-family: "ubuntu", Helvetica, Arial, sans-serif;
+}
+
+html, body{
+	height:100%;
+}
+
+strong {
+    font-family: "Ubuntu-Bold", Helvetica, Arial, sans-serif;
+}
+
+body div#cpc{
+	width:160px;
+}
+
+#cpl li {
+    padding-left: 10px;
+}
+
+#cpl li a {
+	display: inline-block;
+	padding: 5px 0;
+    line-height: 18px;
+}
+
+#cpl > li > a {
+	padding: 10px 0;
+}
+
+#cpl > li.sel {
+	background-color: #f9f9fb;
+}
+
+#cpl > li:not(:last-child):after {
+    content: " ";
+    display: table-cell;
+    width: 138px;;
+    border-bottom: 1px solid #CCCCCC;
+}
+
+#cpl > li:last-child:after{
+	content:"";
+}
+
+.sml {
+    display: none;
+}
+
+#cp{
+	border: 1px #b0b3b8 solid;
+	border-top: none;
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 100%;
+    border-radius: 0px 0px 6px 6px;
+}
+
+#ulb {
+	border-radius: 6px 6px 0px 0px;
+    background: #051B71;
+}
+
+#ulb p{
+	padding: 15px 10px;
+}

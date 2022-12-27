@@ -1,0 +1,235 @@
+.gwc-chat, .gwc-chat button, .gwc-chat div, .gwc-chat input, .gwc-chat textarea {
+	font-size: 1em;
+    font-family: Ubuntu,Arial,Helvetica,sans-serif;
+}
+
+.gwc-chat-embedded-window{
+	border:none !important;
+	background-image:-moz-linear-gradient(top,#ffffff,#eeeeee) !important;
+	background-image:-o-linear-gradient(top,#ffffff,#eeeeee) !important;
+	background-image:linear-gradient(to bottom,#ffffff,#eeeeee) !important;
+}
+.gwc-chat-embedded-window .gwc-chat-head, .gwc-chat-embedded-window .gwc-drag-handle{
+	border:1px solid #051b71;
+	border-radius: 6px 6px 0 0;
+	background-image:linear-gradient(to bottom,#051b71,#051b71);
+	height: 35px;
+}
+.gwc-chat-embedded-window .gwc-chat-body{
+	border:2px solid #051b71;
+	border-top:none;
+}
+
+.gwc-chat-content-area {
+    padding: 0 0 0 0;
+    height: 100%;
+}
+
+.gwc-chat-embedded-window .gwc-chat-message-container{
+	position: relative;
+	top: 0px;
+	left: 0px;
+    right: 0px;
+	bottom: 0px;
+	background:transparent;
+	border:none;
+	padding: 0px 15px; 
+	height: 81%
+}
+
+.gwc-chat-message-form {
+	display: flex;
+	position: relative;
+	padding: 10px;
+	background-color: #fff;
+    left: 0px;
+    bottom: 0px;
+    right: 0px;
+}
+
+.gwc-send-message-bouton {
+	background-image: none;
+	margin-left:5px;
+}
+
+.send-message-bouton{
+	background: transparent;
+    border: none;
+}
+
+.send-message-bouton:focus{
+    outline: none;
+}
+
+.chatViewTemplate form, .chatRegistrationTemplate form {
+	background-color : white;
+}
+
+.gwc-chat-body {
+	height: auto;
+}
+
+.chatViewTemplate {
+	height: 316px;
+}
+
+.gwc-chat-embedded-window .gwc-chat-input, .gwc-chat-embedded-window .gwc-chat-message-input{
+	height:35px;
+	border-radius: 15px 15px 15px 15px;
+	background-color: #f9f9f9;
+	padding: 5px 15px;
+	outline: none;
+}
+.pisp-tchat-mentions{
+	bottom:0px;
+	margin:0px 1px 0px 18px;
+	position:absolute;
+}
+.pisp-tchat-mentions a{
+	text-decoration: underline !important;
+	color: #797979;
+	font-size: 10px;
+}
+.gwc-chat-embedded-window .gwc-chat-message-author {
+	color: #051b71 !important;
+	font-size: 0.9em;
+	word-wrap: break-word;
+	font-weight:bold;
+	width: 50%;
+}
+.gwc-chat-embedded-window .gwc-chat-message-time {
+	color: #999999 !important;
+	text-align: right;
+	font-size: 11px;
+	font-weight: normal;
+	width: 50%
+}
+.gwc-chat-embedded-window .gwc-chat-message-text {
+	color: #585858;
+	font-size: 0.9em;
+	word-wrap: break-word;
+	border-radius: 5px 5px 5px 5px;
+	padding:5px 4px 4px 5px;
+}
+
+.gwc-chat-message{
+	margin: 0.4em 0em 0.4em 0em;
+	display : flex;
+	flex-direction : row;
+	flex-wrap : wrap;
+	justify-content : flex-end;
+}
+
+.gwc-chat-message.gwc-chat-agentMessage .gwc-chat-message-text {
+	background-color: #fff;
+}
+
+.gwc-chat-message.gwc-chat-systemMessage .gwc-chat-message-text {
+	background-color: #fff;
+	font-weight:bold;
+}
+
+.gwc-chat-message:not(.gwc-chat-agentMessage):not(.gwc-chat-systemMessage) .gwc-chat-message-text {
+	background-color: #cccccc;
+}
+
+.gwc-chat-message:not(.gwc-chat-systemMessage) .gwc-chat-message-author {
+	visibility:hidden;
+}
+
+.gwc-chat-embedded-window .gwc-chat-cobrowse-bouton{
+	float:right;
+	margin-top:3px;
+	margin-left:5px;
+}
+
+.gwc-chat-embedded-window .gwc-chat-cobrowse-bouton[style*='hidden'] {
+	display:none;
+}
+
+.gwc-chat-control{
+	border: none;
+}
+
+.gwc-chat-icon-close {
+	background-repeat: no-repeat;
+}
+
+.gwc-chat-icon-minimize {
+	background-repeat: no-repeat;
+}
+
+.gwc-chat-control-minimize {
+	padding-right: 22px;	
+}
+
+
+.gwc-chat-head .gwc-chat-title {
+	display: inline-block;
+	margin: 0.2em 0em 0em 0.5em;
+}
+
+.gwc-chat-window-controls {
+    float: right;
+    margin: 0.5em 0.6em 0em 0em;
+}
+
+/********  Fenetre d'enregistrement du client (formulaire) ********/
+.gwc-chat-branding {
+	display: none;
+}
+
+.gwc-chat-registration-intro {
+	padding: 2em 1em 0.5em 1em;
+	min-height: 65%;
+}
+
+.gwc-chat-registration-intro-p {
+	text-align : center;
+}
+
+.gwc-chat-registration-intro-p a {
+	text-decoration : underline;
+	color: black;
+}
+
+.gwc-chat-registration-buttons{
+	display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0.2em 0.6em 0.2em 0.6em;
+}
+
+.gwc-chat-registration-buttons .gwc-chat-registration-buttons,.gwc-chat-registration-skip,.gwc-chat-registration-submit {
+    flex: 1 1 100%;
+}
+
+.gwc-chat-registration-buttons button.gwc-chat-button {
+	width: 100%;
+	text-align: center;
+	margin: .2em .0em .2em .0em;
+	height: 30px;
+	border: 1px solid #051B71;
+}
+
+.gwc-chat-registration-buttons .gwc-chat-registration-submit button.gwc-chat-button {
+	background-color: #051b71;
+	background-image: none;
+	color: #FFF;
+	font-weight: normal !important;
+}
+
+.gwc-chat-registration-buttons .gwc-chat-registration-submit button.gwc-chat-button:hover {
+	background-color: #051b71;
+	color:#f5f5f5;
+}
+
+.gwc-chat-registration-buttons .gwc-chat-registration-skip button.gwc-chat-button {
+	background-color: transparent;
+	background-image: none;
+	color:#051b71;
+}
+
+.gwc-chat-registration-buttons .gwc-chat-registration-skip button.gwc-chat-button:hover {
+	background-color: #f5f5f5;
+}

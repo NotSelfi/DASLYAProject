@@ -1,0 +1,931 @@
+/**
+ * Feuille de styles des champs de saisie.
+ *
+ * @author Frédéric GILBERT
+ */
+/****************************************************************/
+/*** Agencement dans un tag de placement avec des paragraphes ***/
+/****************************************************************/
+
+div.default,
+div.required {
+    line-height: 13px;
+}
+
+/* Rendu d'un paragraphe normal + héritage pour le mode en erreur et obligatoire */
+div.default,
+div.error,
+div.required {
+    float: left;
+    position: relative;
+}
+
+/* Rendu d'un paragraphe en erreur */
+div.error {
+}
+
+/* Rendu d'un paragraphe obligatoire */
+div.required {
+}
+
+/****************************************************************/
+/*** Etiquettes                                               ***/
+/****************************************************************/
+/* Rendu de l'étiquette par défaut + héritage de style pour les labels en erreur et obligatoire */
+div.default label,
+div.error label,
+div.required label,
+div.default label.insp {
+    float: left; /* aligne éauche les étiquettes */
+    margin: 3px 2px 2px 2px; /*Si modif, synchronisez field en mode inspect et message*/
+}
+
+/* Rendu de l'étiquette en erreur */
+div.error label {
+    color: #be260c !important; /* le important permet d'avoir la couleur rouge dans le cas d'un champ en error ET required*/
+}
+
+/* Rendu de l'étiquette obligatoire */
+div.required label {
+}
+
+/* Uniformisation (en noir) du symbol de champ obligatoire dans l'étiquette des champs ou dans les légendes correspondantes*/
+div.required em,
+div label.required em,
+div.error em,
+.msl em,
+.tbl th em,
+.tbl th.error em,
+.tbl td.error em {
+    color: #000000;
+    padding-right: 0px;
+    margin-right: 0px;
+}
+
+/* Mise en évidence (en rouge) des champs en erreur dans l'étiquette des champs ou dans les légendes correspondantes */
+div.error em,
+.tbl th.error em,
+.esl em,
+.tbl td.error em {
+    color: #be260c !important;
+}
+/*Rendu de l'étiquette pour un champ en mode INSPECT*/
+div.default label.insp {
+}
+
+/****************************************************************/
+/*** Images													  ***/
+/****************************************************************/
+
+/* Alignement des images sur les étiquettes sur les étiquettes/field en mode inpect dans les formulaires*/
+div.default img,
+div.error img,
+div.required img {
+    margin: 3px 2px 2px 2px;
+}
+
+/* Alignement des images sur les étiquettes /field en mode inpect dans les tableaux. D*/
+td.default img,
+td.error img,
+td.required img {
+    margin: 0px 2px 0px 1px;
+    padding: 0px;
+}
+
+/****************************************************************/
+/*** Champ en mode INSPECT									  ***/
+/****************************************************************/
+
+/*******   Dans un formulaire    ******/
+
+/** Mode Inspect : textarea, inputtext, radio dans un Tag Layout et dans un tableau **/
+div.default span,
+div.error span,
+div.required span,
+div.default p,
+div.error p,
+div.required p {
+    float: left; /* aligne à gauche les étiquettes */
+    margin: 3px 2px 2px 2px; /*Si modif, synchronisez étiquette et message*/
+}
+
+div.default p,
+div.error p,
+div.required p {
+    margin-left: 0px;
+}
+
+/** Mode Inspect avec balise PRE : Texte brut dun textBox : police monospace*/
+div.default pre,
+div.error pre,
+div.required pre {
+    font-family: monospace;
+}
+/* div.default span.iunit = L'unité d'un nombre en INSPECT (label à droite d'un label de type nombre)*/
+/* L'unité d'un nombre en EDIT (label à droite d'un field de type nombre)*/
+div.default span.iunit,
+div.default span.unit,
+div.error span.unit,
+div.required span.unit {
+    margin: 3px 2px 2px 2px;
+}
+
+/*******   Dans un tableau    ******/
+
+/* Champs en mode INSPECT dans une cellule de tableau (état cellule normale et en erreur).
+	Les marges sont gérées dans les cellules*/
+td.default span,
+td.error span,
+td.error p,
+td.default p {
+    margin-left: 3px;
+}
+
+td.error p,
+td.default p {
+    margin-top: 0px; /*Alignement vertical avec un simple label sur un ligne (span)*/
+}
+/**
+* style sur les tableau pour avoir un alignement vertical top
+* Cas particulier de l'image qui ne s'aligne pas avec le texte dans un td
+* Ce style spécifique corrige le problème
+*/
+table.vatop tbody td img {
+    vertical-align: middle;
+}
+
+/**
+* style sur les tableau pour avoir un alignement vertical middle
+* Cas particulier de l'image qui ne s'aligne pas avec le texte dans un td
+*  Ce style spécifique corrige le problème
+*/
+table.vamid tbody td img {
+    vertical-align: middle; /* cas pa*/
+}
+
+/* Unité d'un nombre en mode INSPECT dans une cellule de tableau*/
+td.default span.iunit {
+    margin: 1px 2px;
+}
+
+td.default a span.iunit,
+td.default a:visited span.iunit {
+    text-decoration: none;
+}
+td.default a:hover span.iunit {
+    text-decoration: none;
+}
+
+/* Unité d'un nombre en mode EDIT dans une cellule de tableau*/
+td.default span.unit,
+td.error span.unit,
+td.required span.unit {
+    margin: 0px;
+}
+
+/****************************************************************/
+/*** Champ TextField en mode EDIT                      		  ***/
+/****************************************************************/
+
+/****** Dans un formulaire ****/
+/* Rendu du champ par défaut dans un tag Layout (+héritage de propriété pour le mode erreur et obligatorie) */
+div.default input,
+div.error input,
+div.required input,
+td.default input,
+td.error input,
+td.required input {
+    border: 1px #81a6d0 solid;
+    margin: 1px 2px 1px 2px;
+    padding: 2px 1px 3px 1px; /* padding bas à 3px pour se caler sur la hauteur des combos*/
+}
+
+div.default input.fdi {
+    margin: 1px 0px 1px 0px;
+    width: 100%;
+}
+
+div.default input.fdi-small {
+    width: 70%;
+}
+
+/* Rendu du champ en erreur dans un tag Layout */
+div.error input,
+td.error input {
+    border-color: #be260c !important; /* le important permet d'avoir la couleur rouge dans le cas d'un champ en error et required*/
+}
+
+/* Rendu du champ obligatoire dans un tag Layout */
+div.required input,
+td.required input {
+    background-color: #d5e8eb;
+}
+
+/* Rendu des champs numériques */
+input.num {
+    text-align: right !important;
+}
+
+/****** Dans un tableau ****/
+td.default input,
+td.error input,
+td.required input {
+    margin: 1px 2px 0px 2px;
+}
+
+/****************************************************************/
+/*** TextArea                                         		  ***/
+/****************************************************************/
+
+/****** Dans un formulaire *****/
+
+/* Rendu du textarea par défaut + héritage de propriétés pour les mode en erreur et obligatoire*/
+div.default textarea,
+div.error textarea,
+div.required textarea,
+td.default textarea,
+td.error textarea,
+td.required textarea {
+    border: 1px #81a6d0 solid;
+    margin: 1px 2px 1px 2px;
+    padding: 1px 1px 2px 1px;
+}
+
+/* Rendu du textarea en erreur dans un Tag Layout*/
+div.error textarea,
+td.error textarea {
+    border-color: #db522b !important; /* le important permet d'avoir la couleur rouge dans le cas d'un champ en error et required*/
+}
+
+/* Rendu du textarea obligatoire dans un Tag Layout*/
+div.required textarea,
+td.required textarea {
+    background-color: #d5e8eb;
+}
+
+/******* Dans un tableau *******/
+td.default textarea,
+td.error textarea,
+td.required textarea {
+    margin: 1px 2px 0px 2px;
+}
+
+/* Empêcher le redimensionnement sur Firefox, Chrome, Safari. Non supporté par IE */
+textarea {
+    resize: none;
+    box-sizing: border-box;
+}
+
+/****************************************************************/
+/*** Select (listBox)                  		                  ***/
+/****************************************************************/
+
+/******* Dans un formulaire *******/
+
+/* Rendu par défaut d'une combo + héritage de propriété communes pour l'état en erreur et obligatoire*/
+div.default select,
+div.error select,
+div.required select,
+td.default select,
+td.error select,
+td.required select {
+    margin: 1px 2px 1px 2px;
+    height: 1.55em; /* Fixe une hauteur identique selon la casse (majuscule/minuscule) du contenu de la liste et même hauteur qu'un champ de saisie*/
+    border: 1px #81a6d0 solid;
+}
+
+/* Rendu de la combo en erreur dans un tag Layout */
+div.error select,
+td.error select {
+    border: 1px solid #db522b !important; /* le important permet d'avoir la couleur rouge dans le cas d'un champ en error et required*/
+}
+
+/* Rendu du champ obligatoire dans un tag Layout */
+div.required select,
+td.required select {
+    background-color: #d5e8eb;
+}
+
+/* Select à choix Multiple en mode INSPECT */
+.slbmlt,
+.slbmltscroll {
+    margin: 0px;
+    padding: 0px;
+    float: left;
+}
+
+.slbmltscroll {
+    border-color: #81a6d0;
+    border-style: solid;
+    border-width: 1px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.slbmlt span,
+.slbmltscroll span {
+    clear: both;
+    white-space: nowrap;
+    margin: 0px 2px !important;
+}
+
+/****Dans un tableau *****/
+td.default select,
+td.error select,
+td.required select {
+    margin: 1px 2px -1px 2px;
+}
+
+/* Liste d'actions */
+.aslbw {
+    position: relative;
+    overflow: hidden;
+    background-color: transparent;
+    float: left;
+    padding: 0px;
+    margin: 0px;
+    border: 1px solid #90acc5;
+}
+
+/* Liste d'actions filtrable */
+.aslbwf {
+    position: relative;
+    overflow: hidden;
+    background-color: transparent;
+    float: left;
+    padding: 0px;
+    margin: 0px;
+}
+
+.aslb {
+    color: #3d3d3d;
+    background: transparent;
+    margin: 0px 0px 0px !important;
+    clear: both;
+    float: left;
+    height: 18px;
+    border: 0px none transparent !important;
+    border-radius: 0;
+}
+
+select.aslb::-ms-value {
+    background: none; /* supprime le background bleu lors de la selection */
+    color: black; /* couleur du texte (par defaut elle est blanche) */
+}
+
+.aslb optgroup {
+    border-top: 2px solid #ccc;
+    margin: 5px 0px;
+}
+
+.aslb optgroup[label] {
+    font-style: normal;
+    font-weight: bold;
+    color: #6d6b6c;
+}
+
+.aslb optgroup option {
+    color: #6d6b6c;
+}
+
+/****************************************************************/
+/*** Radios													  ***/
+/****************************************************************/
+/****** Dans un formulaire ******/
+div.default ol.rdo,
+div.error ol.rdo,
+div.required ol.rdo,
+td.default ol.rdo,
+td.error ol.rdo,
+td.required ol.rdo {
+    display: list-item;
+    float: left;
+    list-style-type: none;
+}
+
+div.default ol.rdo li,
+div.error ol.rdo li,
+div.required ol.rdo li,
+td.default ol.rdo li,
+td.error ol.rdo li,
+td.required ol.rdo li {
+    clear: left;
+    float: none;
+}
+
+div.default label.rdo,
+div.error label.rdo,
+td.default label.rdo,
+td.error label.rdo {
+    display: inline;
+    float: left;
+    margin: 3px 1.2em 3px 0px;
+    vertical-align: middle;
+}
+
+/* Rendu vertical et rendu horizontal */
+div.default input.rdo,
+div.error input.rdo,
+td.default input.rdo,
+td.error input.rdo,
+td.default input.rdoTab,
+td.error input.rdoTab {
+    border: none; /*Annule l'héritage du border issu de div.default input*/
+    float: left;
+    margin: 3px 3px 3px 3px;
+    vertical-align: middle;
+}
+
+/* div div.default input, div div.required input, table.tbl tr td.required input, table.tbl tr td.default input {
+    padding-top: 0px;
+    padding-bottom: 0px;
+    line-height: 17px;
+    height: 17px;
+} */
+
+/* Rendu de l'étiquette d'un radio en particulier en erreur en un tag layout 
+   il n'est pas en rouge, c'est l'etiquette globale
+*/
+div.error label.rdo,
+td.error label.rdo {
+}
+
+/******* Dans un tableau ******/
+td.default input.rdo,
+td.error input.rdo,
+td.default label.rdo,
+td.error label.rdo,
+td.default input.rdoTab,
+td.error input.rdoTab {
+    margin: -3px 0px -1px 3px; /* Marges négatives pour ne pas augmenter la hauteur de ligne en mode inspect*/
+    padding: 0px;
+    float: none;
+    display: inline;
+}
+
+td.default input.rdoTab,
+td.error input.rdoTab {
+    cursor: pointer;
+}
+
+td.required input,
+td.default input {
+    margin-bottom: 1px;
+}
+
+/****************************************************************/
+/*** Checkbox    			   								  ***/
+
+/****************************************************************/
+/******* Dans un formulaire *****/
+div.default input.cbx,
+div.error input.cbx,
+div.required input.cbx,
+td.default input.cbx,
+td.error input.cbx,
+td.required input.cbx,
+td.default input.cbxTab,
+td.error input.cbxTab,
+td.required input.cbxTab {
+    border: none; /*Annule l'héritage du border issu de div.default input*/
+    margin: 2px 2px 0px 2px;
+}
+/**
+ * Le label d'une checkbox diffère des autres label : 
+ * Firefox n'aligne pas la case et le libellé sinon 
+ */
+div.default label.cbx,
+div.error label.cbx,
+div.required label.cbx,
+td.default label.cbx,
+td.error label.cbx,
+td.required label.cbx {
+    display: inline;
+}
+
+/**** Checkbox en mode inspect */
+label.cbxT,
+label.cbxF {
+    padding-left: 17px;
+    background-image: url("../images/buttons/CheckboxOn.png?v=ku3HoEcwnIoqnmRYQjqwvn-SYDU.");
+    background-position: left center;
+    background-repeat: no-repeat;
+}
+
+label.cbxF {
+    background-image: url("../images/buttons/CheckboxOff.png?v=MqWOu7he8vsm8914uUMVYEQnUP4.");
+}
+
+/***** Dans un tableau ******/
+/* Dans un tableau il n'y a pas de libellé à cé¿½ de la case à cocher !! Ce libellé est factorisé par l'entête de la colonne*/
+td.default input.cbx,
+td.error input.cbx,
+td.required input.cbx,
+td.default label.cbxT,
+td.default label.cbxF,
+td.error label.cbxT,
+td.error label.cbxF,
+td.default input.cbxTab,
+td.error input.cbxTab,
+td.required input.cbxTab {
+    float: none !important;
+    /* margin: 0px; */
+    padding: 0px;
+}
+
+td.default label.cbxT,
+td.default label.cbxF,
+td.error label.cbxT,
+td.error label.cbxF {
+    width: 2em;
+    padding: 0px 5px;
+}
+
+td.default input.cbxTab,
+td.error input.cbxTab,
+td.required input.cbxTab {
+    cursor: pointer;
+    margin: 0px 2px;
+}
+
+/****************************************************************/
+/*** Messages											      ***/
+/****************************************************************/
+/* Message explicitement demandé en gras*/
+div.default span.bmsg,
+div.default span.pmsg,
+td.default span.bmsg,
+td.default span.pmsg {
+    margin: 3px 2px 2px 2px; /*Si modif, synchronisez field en mode inspect et étiquette*/
+}
+
+/* Message explicitement demandé en maigre*/
+div.default span.pmsg {
+    margin-top: 0px;
+}
+
+td.default span.bmsg,
+td.default span.pmsg {
+}
+
+/****************************************************************/
+/*** Date/Calendrier                                          ***/
+/****************************************************************/
+
+div.caldiv {
+    visibility: hidden;
+    z-index: 50;
+    margin: 0px;
+    padding: 0px;
+}
+
+.cal {
+    position: absolute;
+    visibility: hidden;
+    z-index: 50;
+    width: 252px;
+    margin: 0px;
+    padding: 0 6px 6px 0px;
+}
+
+div#calBody {
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px 1px 1px 1px;
+}
+
+div#calBody a {
+    cursor: pointer;
+}
+
+/*DIV d'entête du calendrier*/
+div#calHeader {
+    width: 100%;
+    margin: 0px;
+    padding: 4px 0px 4px 0px;
+    white-space: nowrap;
+    position: relative;
+    height: 30px;
+}
+
+div#calHeader img {
+    cursor: pointer;
+}
+
+div#calHeader img#previous {
+    width: 20px;
+    height: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    position: absolute;
+    margin: 0px;
+    left: 20%;
+}
+
+div#calHeader select#calmois {
+    background-color: white;
+    top: 50%;
+    transform: translateY(-50%);
+    position: absolute;
+    left: 30%;
+}
+
+div#calHeader select#calyear {
+    background-color: white;
+    width: 45px;
+    top: 50%;
+    transform: translateY(-50%);
+    position: absolute;
+    left: 55%;
+}
+
+div#calHeader img#next {
+    width: 20px;
+    height: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    position: absolute;
+    margin: 0px;
+    left: 75%;
+}
+
+div#calHeader img#close {
+    height: 18px;
+    width: 18px;
+    position: absolute;
+    top: 50%;
+    left: 90%;
+    transform: translateY(-50%);
+}
+
+div#calDays {
+}
+
+/* les entêtes des colonnes affichant les jours de la semaine*/
+div#calDays span {
+    float: left;
+    border-right: 1px solid white;
+    border-top: 1px solid white;
+    width: 35px;
+    color: white;
+    text-align: center;
+    padding: 1px 0px 2px 0px;
+}
+
+div#calDays span#fst {
+    border-left: 1px solid white;
+    width: 34px;
+}
+
+div#calDaysBdy {
+    margin: 0;
+    padding: 0;
+    clear: left; /* palier un pb de FF qui n'applique pas un un display bloc à cette DIV*/
+}
+
+/*Tableau correspondant au contenu du calendrier (séparation en une DIV + une TABLE
+ nécessaire car le corps du calendrier est généré dynamiquement via innerHTML et malheureusement IE6.0 interdit la MAJ dynamique de contenu de tableaux !!
+ */
+div#calBody table {
+    width: 100%;
+    border: 1px solid white;
+    white-space: nowrap;
+    padding: 0px;
+    margin: 0px;
+    border-collapse: collapse;
+}
+div#calBody table td {
+    border: 1px solid white;
+    width: 35px;
+    text-align: center;
+    padding: 1px 0px 2px 0px;
+}
+div#calBody table thead td {
+    color: white;
+    background-color: #2f8d99;
+}
+
+div#calBody tbody td.caldaywe {
+    color: #4d4d4d;
+}
+
+div#calBody tbody td.calday_sel,
+div#calBody tbody td.caldaywe_sel {
+    color: #051b71;
+    background-color: white;
+    cursor: pointer;
+}
+
+div#calBody tbody td.calday_high,
+div#calBody tbody td.caldaywe_high {
+    background-color: #051b71;
+    color: white;
+    cursor: pointer;
+}
+
+/**bouton du calendrier [TODO] alignement au milieu*/
+
+div.fwhelp {
+    vertical-align: middle;
+    display: inline;
+}
+
+div.fwhelp input {
+    margin: 1px 2px 1px 2px;
+}
+
+div.fwhelp img.btncal {
+    cursor: pointer;
+    margin: 6px 2px 0px 0px;
+    width: 18px;
+    heigth: 18px;
+}
+
+/*Alignement icone calendrier dans un tableau*/
+td div.fwhelp img.btncal {
+    margin-top: -8px;
+}
+
+/* Alignement des images sur les étiquettes /field en mode inpect dans les tableaux. D*/
+td.default img,
+td.error img,
+td.required img {
+    margin-top: -2px;
+}
+
+/* Evite le saut de ligne dans les tableaux */
+div.default td span,
+div.error td span,
+div.required td span,
+div.default td p,
+div.error td p,
+div.required td p {
+    margin-right: auto;
+}
+
+/****************************************************************/
+/** Authentification Forte										*/
+/****************************************************************/
+.em1 {
+    color: #32cd32;
+}
+
+.em2,
+.em4 {
+    color: #ff0000;
+}
+
+.em3 {
+    color: #ff00ff;
+}
+
+.em4 {
+    text-decoration: underline;
+}
+
+.cmpf {
+    width: auto;
+}
+
+.cmpf div.grid {
+    width: auto !important;
+}
+
+/************************************************************/
+/*** Messages Décorés */
+/************************************************************/
+/* Décorateur de couleur
+ * La couleur effective est générée dynamiquement dans un attribut "style" sur la balise <em> du décorateur
+ */
+em.color {
+}
+/* Décorateur de mise en gras*/
+em.gras {
+    display: inline;
+}
+
+div.default span ul,
+div.content ul {
+    list-style-type: disc;
+    display: block;
+    padding-left: 20px;
+}
+
+div.default span ul ul,
+div.content ul ul {
+    padding-left: 20px;
+    display: block;
+    list-style-type: none;
+    list-style-image: url("../../common/images/tiret.gif?v=R1iQdLptdLlnJ8OAIrGX7OGFkjY.");
+}
+
+div.default span ul ul ul,
+div.content ul ul ul {
+    list-style-type: square;
+    padding-left: 20px;
+    display: block;
+    list-style-image: none;
+}
+
+span.tiny,
+span.tiny em {
+    float: none !important ;
+    font-size: 7px !important;
+}
+
+span.small,
+span.small em {
+    float: none !important ;
+    font-size: 9px !important;
+}
+
+span.normal,
+span.normal em {
+    float: none !important ;
+    font-size: 11px;
+}
+
+span.large,
+span.large em {
+    float: none !important ;
+    font-size: 14px !important;
+}
+
+span.huge,
+span.huge em {
+    float: none !important ;
+    font-size: 19px !important;
+}
+
+span.unit.col2col {
+    position: fixed;
+}
+
+div.error td span,
+div.required td span,
+div.default td p,
+div.error td p,
+div.required td p {
+    margin-right: auto;
+}
+
+form a {
+    text-decoration: underline;
+    /*float: left;*/
+}
+
+/* SELECT LIST filtrage dynamique */
+.filterable-select {
+    display: inline-flex;
+    float: none !important;
+}
+
+.filterable-select .aslbwf {
+    width: 100%;
+}
+
+.select2-container,
+.select2-container span {
+    float: none !important;
+    margin: 0 !important;
+}
+
+.select2-container span.select2-selection--single:focus {
+    outline: none;
+    border: #000000 2px solid;
+}
+
+.select2-container--default .select2-selection--single {
+    height: 24px !important;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    color: #000000 !important;
+    line-height: 22px !important;
+    display: unset !important;
+}
+
+div.error .select2-selection,
+td.error .select2-selection {
+    border: 1px solid #db522b !important;
+    border-radius: 4px;
+}
+
+.select2-container--default
+    .select2-results__option--highlighted.select2-results__option--selectable {
+    background-color: #1e90ff !important;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow b {
+    background-image: url(../images/bullets/BulletBottomTriangleBlack.png?v=MX38_jrSjflfuqCJqqHAOcN7r04.);
+    border: none !important;
+    height: 18px !important;
+    width: 18px !important;
+    margin: auto !important;
+    top: 4px !important;
+    left: 1px !important;
+    background-position: calc(100% - 5px) 50%;
+    background-repeat: no-repeat;
+    background-color: rgb(255, 255, 255);
+}

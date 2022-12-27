@@ -1,0 +1,360 @@
+/**
+ * Definition des polices par defaut.
+ *
+ * @author Benjamin FONTAINE
+ */
+html {
+    font-family: "Trebuchet MS", Arial, Verdana, sans-serif;
+    font-style: normal;
+    font-size: 11px;
+
+}
+
+input, select, textarea {
+    font-size: 11px;
+    font-family: "Trebuchet MS", Arial, Verdana, sans-serif;
+}
+
+/**
+ * Definition des polices presentes dans les champs d'erreurs.
+ *
+ * @author Benjamin FONTAINE
+ */
+
+/** conteneur d'un message */
+div.errors div.content span, div.info div.content span {
+    font-weight: normal;
+    font-size: 15px;
+    font-family: "Ubuntu-Bold", Helvetica, Arial, sans-serif;
+}
+
+div.errors div.content span.esl, div.info div.content span.esl,
+div.errors div.content ul li {
+    font-weight: normal;
+    font-size: 12px;
+}
+
+/** legende du symbole de champ en erreur*/
+div.errors span.esl {
+    font-size: 11px;
+    font-weight: normal !important;
+}
+
+/** conteneur des messages d'erreurs */
+div#technicalError div {
+    font-weight: bold;
+}
+
+/** Message ligne 1 */
+div#technicalError span#L1 {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+/** Message ligne 2 et ligne 3 */
+div#technicalError span#L2, div#technicalError span#L3 {
+    font-weight: bold;
+}
+
+div.info div.content p {
+    font-weight: normal;
+}
+
+div.info div.content p, div.info div.content p em.color,
+div.info div.content p em.gras, div.info div.content p a.link,
+div.info div.content ul li, div.info div.content ul li em {
+    font-size: 12px;
+}
+
+div.info div.content p#first, div.info div.content p#first em.color,
+div.info div.content p#first em.gras, div.info div.content p#first a.link {
+    font-size: 12px;
+}
+
+div.info div.content p#first {
+    font-weight: normal;
+    font-size: 15px;
+    font-family: "Ubuntu-Bold", Helvetica, Arial, sans-serif;
+}
+
+/* Rendu de l'etiquette en erreur */
+div.error label {
+    font-weight: bold;
+}
+
+/**
+ * Definition des polices presentes dans les pages applicatives.
+ *
+ * @author Benjamin FONTAINE
+ */
+
+/**************************************************************
+***************************************************************
+*******************        BANNER           *******************
+***************************************************************
+**************************************************************/
+
+/* style du message de remplacement de l'animation flash */
+div.banner p {
+
+}
+
+/**************************************************************
+***************************************************************
+*******************        BLOCS           ********************
+***************************************************************
+**************************************************************/
+.btit{
+    padding-top: 10px;
+    font-family: "Ubuntu-Bold", Helvetica, Arial, sans-serif;
+    float: left;
+}
+
+.b0 > .btit {
+    font-size: 20px;
+    font-weight: bolder;
+    color: #080d33;
+}
+
+.b1 > .btit  {
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 15px;
+    color: #05239b;
+}
+
+/* sytle des legendes */
+div.b0 p.cpt {
+    font-weight: 600;
+}
+
+div.b0 div.b1 div.bfil {
+    font-weight: normal;
+}
+
+ol.nav li.pnb {
+    font-weight: bold;
+    font-size: 12px;
+    width: 4.6em;
+    height: 15px;
+    padding-top: 0px;
+    margin-top: 0px;
+    position: relative;
+    top: 1px;
+}
+
+ol.rdo li {
+    display: table;
+}
+
+div.b2 div.btit {
+    font-weight: bold;
+    font-size: 12px;
+}
+
+div.b2 div.bfil {
+    font-weight: normal;
+}
+
+div.bi div.btit {
+    font-size: 11px;
+}
+
+div.bb div.btit {
+    font-weight: bold;
+}
+
+/**************************************************************
+***************************************************************
+******************        FIELDS           ********************
+***************************************************************
+**************************************************************/
+
+/* Mise en evidence (rouge et en gras) du symbol de champ obligatoire/en erreur dans l'etiquette des champs ou dans les legendes correspondantes*/
+div.required em, div label.required em, div.error em, .msl em, .esl em, .tbl th em, .tbl td.error em {
+    font-weight: normal;
+}
+
+/** Mode Inspect : textarea, inputtext, radio dans un Tag Layout et dans un tableau **/
+div.default span.itemFormReadOnly, div.error span.itemFormReadOnly, div.required span.itemFormReadOnly, div.default p.itemFormReadOnly, div.error p.itemFormReadOnly, div.required p.itemFormReadOnly {
+    font-weight: normal;
+}
+
+div.default p, div.error p, div.required p, table.tbl tr td.default span.normal {
+    line-height: 1.15em;
+}
+
+/* div.default span.iunit = L'unite d'un nombre en INSPECT (label a droite d'un label de type nombre)*/
+/* L'unite d'un nombre en EDIT (label a droite d'un field de type nombre)*/
+div.default span.iunit, div.default span.unit, div.error span.unit, div.required span.unit {
+    font-weight: normal;
+}
+
+/* Champs en mode INSPECT dans une cellule de tableau (etat cellule normale et en erreur).
+	Les marges sont gerees dans les cellules*/
+td.default span, td.error span, td.error p, td.default p {
+    font-weight: normal !important;
+}
+
+/* Unite d'un nombre en mode INSPECT dans une cellule de tableau*/
+td.default span.iunit {
+    font-weight: normal;
+    margin: 0px 2px;
+}
+
+/* Unite d'un nombre en mode EDIT dans une cellule de tableau*/
+td.default span.unit, td.error span.unit, td.required span.unit {
+    font-weight: normal;
+}
+
+/* Rendu de l'etiquette d'un radio en particulier en erreur en un tag layout 
+   il n'est pas en rouge, c'est l'etiquette globale
+*/
+div.error label.rdo, td.error label.rdo {
+    font-weight: normal;
+}
+
+/* Message explicitement demande en gras*/
+div.default span.bmsg, div.default span.pmsg, td.default span.bmsg, td.default span.pmsg {
+    font-weight: bold;
+}
+
+/* Message explicitement demande en maigre*/
+div.default span.pmsg {
+    font-weight: normal;
+}
+
+div.default label.rdo, div.error label.rdo, td.default label.rdo, td.error label.rdo {
+    display: inline;
+    float: left;
+    margin: 3px 1.2em 3px 1px;
+}
+
+td.default input.rdo, td.error input.rdo, td.default label.rdo, td.error label.rdo, td.default input.rdoTab, td.error input.rdoTab {
+    margin: -3px 0px -1px 3px;
+    padding: 0px;
+    float: none;
+    display: inline;
+}
+
+
+/* les entetes des colonnes affichant les jours de la semaine*/
+div#calDays span {
+    font-weight: bold;
+}
+
+div#calBody table td {
+    font-weight: bold;
+}
+
+div#calBody table tbody td.calday {
+    font-weight: bold;
+}
+
+div#calBody tbody td.caldaywe {
+    font-weight: normal;
+}
+
+div#calBody tbody td.calday_high, div#calBody tbody td.caldaywe_high {
+    font-weight: bold;
+}
+
+em {
+    font-style: normal;
+}
+
+.em1 {
+    font-weight: bold;
+}
+
+.em2 {
+    font-weight: bold;
+}
+
+.em3 {
+    font-weight: bold;
+}
+
+/* Decorateur de mise en gras*/
+em.gras {
+    font-weight: bold;
+}
+
+/* Liste d'actions */
+.aslb {
+    font-family: "Trebuchet MS", Arial, Verdana, sans-serif;
+    font-style: normal;
+    font-size: 11px;
+}
+
+/**************************************************************
+***************************************************************
+******************         LINKS           ********************
+***************************************************************
+**************************************************************/
+/* Specification de la visualisation du text d'un bouton d'action.
+   Heritage de propriete communes pour ses differents etat : survole(.high), selectionne(.sel), desactive (-dis), avec image (img, imgva)
+*/
+.btn .btntxt {
+    font-weight: bold;
+}
+
+/**************************************************************
+***************************************************************
+******************          PAGE           ********************
+***************************************************************
+**************************************************************/
+div#loadingApplet {
+    font-weight: bold;
+}
+
+/* ------------ custom ------------- */
+
+
+
+ol.bbtn {
+    margin-top: 12px;
+    margin-bottom: 15px;
+}
+
+
+
+.bdy.miTbl table thead {
+    background-color: #f9f9fb;
+}
+
+.bdy.miTbl table tbody {
+    font-size: 12px;
+}
+
+
+
+#contenu #main_content #content {
+    width: 100%;
+    float: left !important;
+    position: relative;
+}
+
+select::-ms-expand {
+	display: none;
+}
+
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    /* Some browsers will not display the caret when using calc, so we put the fallback first */
+    /*background: url("BulletBottomTriangleBlack.png") white no-repeat 98.5% !important; !* !important used for overriding all other customisations *!*/
+    background-image: url("../../internet/images/bullets/BulletBottomTriangleBlack.png?v=MX38_jrSjflfuqCJqqHAOcN7r04.") !important;
+    background-position: calc(100% - 5px) !important;
+    background-repeat: no-repeat !important;
+    background-color: white !important;
+}
+
+select[multiple] {
+	background-image: none !important;
+    background-position: calc(100% - 5px) !important;
+    background-repeat: no-repeat !important;
+    background-color: white !important;
+}
+

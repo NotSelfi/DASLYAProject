@@ -1,0 +1,517 @@
+/*! Feuille de styles des blocs de données niveau 0, 1, 2, borderless et cadre. */
+
+/************************************/
+/*** bloc niveau 0     		      ***/
+/************************************/
+
+/* bloc niveau 0 - bloc contenu avec boutons */
+div.mib {
+	height: 1%;
+	clear: left;
+}
+
+/* bloc niveau 0 - bloc contenu sans bouton */
+div.mi {
+	height: 1%;
+	clear: left;
+	padding-bottom: 2px; /*marge basse intra bloc 0 se rajoute à la marge-basse interbloc des blocs 1*/
+	width: 100%;
+}
+
+
+/* bloc des actions */
+ol.bbtn {
+	display: inline;	
+	list-style-type: none;
+}
+
+ol.bbtn li {
+    display: inline;
+    margin-left: 7px;
+}
+
+/* Bloc niveau 1 & 2 : Etiquette de filtre de bloc */
+div.bfil label.select {
+	margin: 3px 2px 1px 2px;
+}
+
+/************************************/
+/*** bloc niveau 1                					***/
+/************************************/
+
+/* bloc niveau 1 - bloc filtre */
+div.b1 div.bfil {
+	display: block;
+	clear: left;
+	float: left;
+	padding: 0 0.5em 0 0;
+}
+
+div.b1 div.bfil select, div.b1 div.bfil input {
+	height: 1.45em; /* Fixe la même hauteur selon la casse du contenu*/
+	padding :0;
+	padding-right: 15px;
+	margin: 1px 0;
+	border: 1px solid #81A6D0;
+}
+
+@media all and (-ms-high-contrast:none) {
+    div.b1 div.bfil select { padding-right: 15px; } /* IE10 */
+    *::-ms-backdrop, div.b1 div.bfil select { padding-right: 15px; } /* IE11 */
+}
+
+div.b1 div.bfil input.rdo {
+	margin: 0px 0px 0px 0px;
+	border: none ;
+}
+
+/* bloc niveau 1 - bloc contenu */
+div.b1 div.bdy {
+	border: 1px solid #81A6D0;
+	clear: left;
+	height: auto;
+	margin: 0px;
+	padding:0px;
+}
+
+/***** marges externes (inter-blocs) bloc 1.*/
+/*marge horizontale*/
+div.hmeb1{
+	margin-left: 12px ;
+}
+/* marge verticale bloc 1 sans boutons*/
+div.vmeb1{
+	margin-bottom: 15px;
+}
+/* marge verticale bloc 1 avec boutons*/
+div.vmebb1{
+	margin-bottom: 15px;
+}
+
+
+/** 
+ * Configuration pour permettre l'impression des tableaux sans scroll bar
+ * (notamment pour les tableaux filtrables dynamiques)
+ */
+@media print {	
+	.miTbl{
+	  overflow: revert !important;
+	  max-height: 100% !important;
+	}
+}
+
+/***** marges internes (intra-bloc) bloc 1*/
+/*marges internes (mi) intra-bloc lorsque le contenu d'un bloc 1 sans boutons est un tableau*/
+div.b1 div.miTbl{
+	padding-top: 0px;
+	padding-left: 0px;
+	padding-bottom: 5px;
+	padding-right: 0px;
+}
+/*marges internes (mi) intra-bloc lorsque le contenu d'un bloc 1 avec boutons est un tableau */
+div.b1 div.mibTbl{
+	padding-top: 0px;
+	padding-left: 0px;
+	padding-bottom: 0px;
+	padding-right: 0px;
+}
+/*marges internes (mi) intra-bloc lorsque le contenu d'un bloc 1 sans boutons est un bloc niveau 2*/
+div.b1 div.miB2{
+	padding-top: 8px;
+	padding-left: 8px;
+	padding-bottom: 0px; /*gérée par la marge inter-bloc des blocs contenus*/
+	padding-right: 8px;
+}
+
+/*marges internes (mi) intra-bloc lorsque le contenu d'un bloc 1 avec boutons est un tableau */
+div.b1 div.mibB2{
+	padding-top: 8px;
+	padding-left: 8px;
+	padding-bottom: 0px; /*gérée par la marge inter-bloc des blocs contenus*/
+	padding-right: 8px;
+}
+
+/*marges internes (mi) intra-bloc lorsque le contenu d'un bloc 1 sans boutons est un formulaire*/
+div.b1 div.miFld{
+	padding: 10px;
+
+}
+
+/*marges internes (mi) intra-bloc lorsque le contenu d'un bloc 1 avec boutons est  un formulaire */
+div.b1 div.mibFld{
+	padding-top: 10px;
+	padding-left: 7px;
+	padding-bottom: 10px; /*gérée par la marge inter-bloc des blocs contenus*/
+	padding-right: 4px;
+}
+
+/* barre de navigation */
+div.b1 ol.nav {
+	background-color: #00A6EB;
+	color:white;
+	list-style-type: none;
+	/*margin: -3px 0px 0px 6px;*/
+	padding: 0px;
+}
+
+/**** Barre de navigation ****/
+ol.nav{
+	padding: 0;
+	margin: 0;
+	list-style: none;
+    vertical-align: middle;
+    text-align: center;
+}
+
+ol.nav li {
+	display: inline-block;
+   	width: 4em;
+   	margin-top: 1px;
+   	margin-bottom: 2px;
+   	height: 1.1em;
+}
+/* Le no de la page courante sur le nombre de page*/
+ol.nav li.pnb {
+	width: 5em; /* largeur de la zone numéro de page */
+   	margin:0;
+	color: white;
+ }
+
+ol.nav li a {
+	text-decoration: none;
+	float: left;
+}
+
+/*Le compteur de page courante*/
+ol.nav li span {
+	float: none; /* annule l'alignement à gauche par défaut imposé par les tags de placement */	
+}
+
+/***** boutons des blocs ******/
+div.b1 ol.bbtn {
+	float: right; /* alignement à droite des boutons */
+	list-style-type: none;
+	/*margin: -9px 17px 0px 0px;*/
+}
+
+
+/************************************/
+/*** bloc niveau 2                ***/
+/************************************/
+
+/* bloc niveau 2 - bloc titre */
+div.b2 div.btit {
+	background: none;
+	color: white;
+	float: left;	
+	height: 1.5em;
+	margin-bottom: -0.4em;
+	padding: 0.3em 2em 0.1em 0.7em;
+}
+
+/* bloc niveau 2 - filter */
+div.b2 div.bfil {
+	color: white;
+	display: block;
+	float: left;
+	height: 1.5em;
+	margin-bottom: -0.5em;
+}
+
+/* bloc niveau 2 - bloc contenu */
+div.b2 div.bdy {
+	border-width: 5px 1px 1px 1px;
+	border-color: #81A6D0;
+	border-top-color: #2F8D99 ;
+	clear: both;
+	height: 1%; /* The IE Escaping Floats Bug : disparition des bordures */
+	margin: 0px;
+	padding: 0px;
+}
+/**** marges externes (inter-bloc) bloc 2. Le style CSS étant posé sur la DIV la plus englobante (portant le style b2), le style parent est bien div.b1 et non div.b2*/
+/*marge horizontale*/
+div.hmeb2{
+	margin-left: 10px ;	
+}
+
+/* marge verticale bloc 1 avec boutons*/
+div.vmebb2{
+	margin-bottom: 17px;
+}
+
+/**** marges internes (intra-bloc) bloc 2*/
+/*marges internes (mi) intra-bloc lorsque le contenu d'un bloc 2 sans boutons est un tableau*/
+div.b2 div.miTbl{
+	padding-top: 0px;
+	padding-left: 0px;
+	padding-bottom: 5px;
+	padding-right: 0px;
+}
+/*marges internes (mi) intra-bloc lorsque le contenu d'un bloc 2 avec boutons est un tableau */
+div.b2 div.mibTbl{
+	padding-top: 0px;
+	padding-left: 0px;
+	padding-bottom: 14px;
+	padding-right: 0px;
+}
+
+/*marges internes (mi) intra-bloc lorsque le contenu d'un bloc 2 sans boutons est un bloc niveau 2*/
+div.b2 div.miFld{
+	padding-top: 4px;
+	padding-left: 4px;
+	padding-bottom: 4px; /*gérée par la marge inter-bloc des blocs contenus*/
+	padding-right: 4px;
+}
+
+/*marges internes (mi) intra-bloc lorsque le contenu d'un bloc 2 avec boutons est un tableau */
+div.b2 div.mibFld{
+	padding-top: 4px;
+	padding-left: 4px;
+	padding-bottom: 13px; /*gérée par la marge inter-bloc des blocs contenus*/
+	padding-right: 4px;
+}
+
+
+/************************************/
+/*** bloc borderless              ***/
+/************************************/
+
+div.bb div.btit{
+	color: #05239b;
+	width: 99%;
+	height: 1.2em;
+	margin:0;
+	padding: 0.2em 0 0.3em 0.6em;
+}
+
+div.bb div.bdy {
+	border: 0px;
+	margin: 0px;
+	padding: 0px;
+}
+
+/*marges externes (inter blocs) borderless. Le style CSS étant posé sur la DIV la plus englobante (portant le style bb), le style parent est bien div.b1 et non div.bb car un borderless peut être dans un bloc 1 ou 2*/
+/*Aucune marge externe pour ce type de bloc*/
+
+
+/**** marges internes (inter-bloc) borderless*/
+/*marges internes (mi) intra-bloc lorsque le contenu d'un bloc Borderless sans boutons est un bloc niveau 2*/
+div.bb div.miFld{
+	padding: 0px;
+}
+
+/************************************/
+/*** bloc cadre                   					***/
+/************************************/
+
+div.bc div.bdy {
+	background-color: #D5E8EB; 
+	border:1px solid #D5E8EB; /* Pallier un bug d'affichage FireFox qui n'affiche pas dans ce cas) le background s'il n'y a pas de bordure*/
+}
+/**** marges externes (inter blocs) cadre. Le style CSS étant posé sur la DIV la plus englobante (portant le style bb), le style parent est bien div.b1 et non div.bb car un borderless peut être dans un bloc 1 ou 2*/
+/*Aucune marge externe pour ce type de bloc*/
+
+/**** marges internes (inter-bloc) cadre*/
+/*marges internes (mi) intra-bloc lorsque le contenu d'un bloc Borderless sans boutons est un bloc niveau 2*/
+/*marges internes (mi) intra-bloc lorsque le contenu d'un bloc Borderless sans boutons est un bloc niveau 2*/
+div.bc div.miFld{
+	padding: 0px;
+}
+
+/*****************************************************************************************/
+/*** Spécialisation des CSS de la skin par défaut INTERNET 				               ***/
+/*****************************************************************************************/
+
+/* bloc d'info */
+div.vmebi {
+    margin-bottom: 14px;
+}
+
+div.hmebi {
+    margin-left: 12px;
+}
+
+div.bi div.content {
+    border: 1px solid #CCCCCC;
+    border-radius: 4px 4px 4px 4px;
+    position: relative;
+    padding: 15px;
+    padding-left: 50px;
+    min-height: 30px;
+    overflow-x: hidden;
+    background-image: url("../../internet/images/message/picto_info.png?v=Nq2iL3gCylIxSkXijywZ306xD5c.");
+    background-repeat: no-repeat;
+	background-position: 10px 10px;
+}
+
+div.bi > div > div.bdy > .grid > div:first-child{
+	padding: 0;
+}
+
+div.bi div.bdy > .grid > div div.b2titcnt {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 15px;
+    color: #05239b;
+	font-family: "Ubuntu-Bold", Helvetica, Arial, sans-serif;
+}
+div.bi div.bdy > .grid > div div.btit {
+	margin-bottom: 12px;
+	padding: 20px 7%;
+	padding-top: 12px;
+}
+
+div.bi div.bdy > .grid > div:first-child div.btit {
+    padding-top: 12px;
+	background : #FFFFFF;
+	height: auto;
+	margin-bottom: auto;
+}
+
+div.bi div.bdy > .grid > div:first-child div.b2titcnt {
+    color: #080d33;
+}
+
+div.bi div.bdy > .grid > div div.bdy, div.bi div.bdy > .grid > div:first-child div.bdy {
+    padding: 10px;
+    padding-bottom: 0px;
+}
+
+div.bi div.bdy div.btit {
+	float: none;
+}
+
+div.bi div.bdy > .grid > div .itemFormReadOnly {
+    font-weight: 800;
+    font-family: "Ubuntu-Bold", Helvetica, Arial, sans-serif;
+}
+
+/* bloc niveau 1 - bloc filtre */
+div.b1 div.bfil label.rdo{
+	margin :0;
+	padding: 0px 0.5em 0px 3px ;
+	height: 1em;
+}
+
+
+/* bloc niveau 1 - bloc contenu */
+div.b1 div.bdy {
+	border: 1px solid #CCCCCC;	
+	border-radius: 4px 4px 4px 4px;
+	position: relative;
+	/*padding-top: 6px !important;*/
+	background-color: #FFFFFF;
+
+}
+
+
+
+div.b1 ol.bbtn {
+    position: relative;
+    /*top: -8px;*/
+}
+
+div.b1 div.b2 > div.bdy {
+	background : transparent !important;
+	border: none;	
+    position: relative;
+    top: 0;
+}
+
+div.b1 div.b2 ol.bbtn {
+    position: relative;
+    top: 0;
+}
+
+div.b1 div.b2 ol.nav {
+    position: relative;
+    top: 0;
+    width: 100%;
+    left: 0;
+    background-color: transparent;
+}
+
+div.bb div.bdy {
+	background: transparent !important;
+    border: 0 none;
+}
+
+div.bc div.bdy {
+    border: 1px solid #cccccc;
+	background: #f9f9fb !important;
+    /*border-radius: 0 0 0 0;*/
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    position: relative;
+    top: 0;
+}
+
+/*******************
+ * Bloc pagination *
+ *******************/
+div.b1 ol.nav {
+    color: #C93269;
+    background: #FFFFFF;
+    position: relative;
+    top: 50%;
+    transform: translate(0%, -50%);
+    margin-top: 25px;
+}
+
+/* Le no de la page courante sur le nombre de page*/
+ol.nav li.pnb {
+	color: #080d33;
+ }
+
+/* Bouton de navigation première page - enabled*/
+ol.nav li.fst {
+	background: url("../../internet/images/blocs/pagination_first_enabled.png?v=pHgod8Bc9ibTqpFVL1JC76WP6C8.") no-repeat center center;
+}
+/* Bouton de navigation première page - enabled + survol*/
+ol.nav li.fst:hover {
+	background: url("../../internet/images/blocs/pagination_first_over.png?v=Xh3gsDiaQtgKGb5TnVIudyumjI8.") no-repeat center center;
+}
+/* Bouton de navigation première page - disabled*/
+ol.nav li.fst-dis {
+	background: url("../../internet/images/blocs/pagination_first_disabled.png?v=kNttl3IdC3iNJuRHvqB05LYrVyg.") no-repeat center center;
+}
+
+/* Bouton de navigation  page précèdente - enabled*/
+ol.nav li.prv {
+	background: url("../../internet/images/blocs/pagination_previous_enabled.png?v=9GB_uWqYlByDzJEj_ZR3Mj-PYPw.") no-repeat center center;
+}
+/* Bouton de navigation  page précèdente - enabled + survol*/
+ol.nav li.prv:hover {
+	background: url("../../internet/images/blocs/pagination_previous_over.png?v=9GB_uWqYlByDzJEj_ZR3Mj-PYPw.") no-repeat center center;
+}
+/* Bouton de navigation  page précèdente - disabled*/
+ol.nav li.prv-dis {
+    background: url(../../internet/images/blocs/pagination_previous_disabled.png?v=hXCAoYw683asD5w_HYF1htleEHc.) no-repeat center;
+}
+
+/* Bouton de navigation  page suivante - enabled*/
+ol.nav li.nxt {
+	background: url("../../internet/images/blocs/pagination_next_enabled.png?v=T1QRjQEZDi7Nm6HBziLc1h3Gf7s.") no-repeat center center;
+}
+/* Bouton de navigation  page suivante - enabled + survol*/
+ol.nav li.nxt:hover {
+	background: url("../../internet/images/blocs/pagination_next_over.png?v=T1QRjQEZDi7Nm6HBziLc1h3Gf7s.") no-repeat center center;
+}
+/* Bouton de navigation  page suivante - disabled*/
+ol.nav li.nxt-dis {
+	background: url("../../internet/images/blocs/pagination_next_disabled.png?v=Hgw9umnmlAxD4LwqHYM8AA6C-t8.") no-repeat center;
+}
+
+/* Bouton de navigation dernière page - enabled*/
+ol.nav li.lst {
+	background: url("../../internet/images/blocs/pagination_last_enabled.png?v=MKGF64H8B-7tXcxeET8dT2NZvMk.") no-repeat center center;
+}
+/* Bouton de navigation dernière page - enabled + survol*/
+ol.nav li.lst:hover {
+	background: url("../../internet/images/blocs/pagination_last_over.png?v=2cQiVHr_jl6mqHPS83DbCQrWofg.") no-repeat center center;
+}
+/* Bouton de navigation dernière page - disabled*/
+ol.nav li.lst-dis {
+	background: url("../../internet/images/blocs/pagination_last_disabled.png?v=sKFv6u2uTuWRnXJ0Ti7mEt18l10.") no-repeat center center;
+}

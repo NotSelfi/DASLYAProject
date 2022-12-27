@@ -1,0 +1,25 @@
+/**
+ * Feuille de styles de la télécommande du portail INTERNET
+ * Isolation des styles propre à la frame de la télécommande afin de limiter les impacts CSS 
+ * dans le cas d'une intégration de la télécommande dans une page de web app externe (style MOSS)
+ *
+ * @author Jean-Luc Guigné
+ */
+
+body{
+	background-color: white;
+	margin: 0;
+	padding: 0;
+}
+
+html {
+	overflow: hidden;
+}
+
+html, body {
+	height: 100%;
+}
+
+html>body div.container {
+    height: auto;	
+}

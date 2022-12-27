@@ -1,0 +1,35 @@
+@charset "ISO-8859-1";
+/********************************************************************************
+ * Styles d'impression du portail de secours sharepoint
+ ********************************************************************************/
+div#topBanner,
+div#logo {
+    display: none;
+}
+
+/* -------------------------- */
+/* - Bandeaux publicitaires - */
+/* -------------------------- */
+/* style du conteneur des bannières positionnées en haut et à droite */
+div.tbanner,
+div.rbanner {
+    display: none !important;
+}
+
+div#footer {
+    background-image: none;
+    width: 680px;
+    margin: 0px;
+}
+
+/* ----------- */
+/* - Boutons - */
+/* ----------- */
+
+.btn {
+    background-color: transparent;
+}
+
+.btn span.btntxt {
+    color: grey;
+}

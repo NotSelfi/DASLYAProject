@@ -1,0 +1,649 @@
+// === ITUANGK - S3 - recherche dynamique - début - Implémentation des tris des colonnes des tableaux
+
+var CONST_CLASS_SORT_ASC   	                   = "tcth";
+var CONST_CLASS_SORT_DESC  	                   = "tctb";
+var CONST_CLASS_SORT_UNDEF 	                   = "tctm";
+var CONST_CLASS_SORT_COL 	                   = "sortColumn";
+var CONST_CLASS_SORT_PARAM 	                   = "sortValue";
+
+var CONST_COL_IS_PRICE 	                       = "sortPrice";
+var CONST_COL_IS_NUMBER 	                   = "sortNumber";
+var CONST_COL_IS_DATE 		                   = "sortDate";
+var CONST_COL_IS_TIMESTAMP 		               = "sortTimeStamp";
+var CONST_COL_IS_TEXT 		                   = "sortText";
+var CONST_COL_IS_UKN 		                   = "sortUkn";
+var CONST_COL_IS_CUSTOM_SYNTHESE_DROIT         = "sortSyntheseDroits";
+
+
+var CONST_SYNTHESE_DROIT_LABEL_SANS_PLAFOND    = "Sans plafond";
+var CONST_SYNTHESE_DROIT_TIRET                 = "-";
+var CONST_CHAINE_VIDE                          = "";
+var CONST_VIRGULE                              = ",";
+var CONST_POINT                                = ".";
+var CONST_ESPACE                               = " ";
+var CONST_ESPACE_INSECABLE                     = " "; // Attention, ce n'est pas un espace normal
+var CONST_REGEX_ALL_SPACE_TYPE                 = /\s/g;
+var CONST_REGEX_ALL_SPACE_TYPE_MULTILIGNES     = /\s/gm;
+var CONST_NOMBRE_INDEFINI                      = -99999999;
+
+
+/**
+ *  Convertit une chaine de caractères en nombre
+ *  Attention, si le nombre est invalide, on renvoie CONST_NOMBRE_INDEFINI
+ *
+ * @param stringNumber		String 		Le nombre à convertir
+ * 
+ * @return integer
+ */
+function convertToNumberFix2(stringNumber)
+{
+	var value = stringNumber.trim().replace(/((\r\n|\n|\r)(\s )+)/gm, CONST_CHAINE_VIDE);
+	value = value.replace(CONST_REGEX_ALL_SPACE_TYPE_MULTILIGNES, CONST_CHAINE_VIDE).replace(CONST_VIRGULE, CONST_POINT);
+	value = parseFloat(value).toFixed(2);
+	
+	if (isNaN(value))
+	{
+		value = CONST_NOMBRE_INDEFINI;		
+	}
+	
+	return value;
+}
+
+/**
+ *  Détecte automatiquement le type d'une colonne
+ *
+ * @param jqTableID		String 			ID de la table (exemple : "#tableName")
+ * @param th			Jquery Object	Header de la colonne du tableau
+ */
+function autoDetectColType(jqTableID, th)
+{
+	if (!th)
+	{
+		return false;
+	}
+
+	var columnIndex = $(th).index() + 1; // Ne pas oublier le +1
+	var listeDesLignesDansLaColonne = $(jqTableID + " tr td:nth-child(" + columnIndex + ")");
+
+	// Teste si la colonne est une colonne de date : concaténation de toutes les valeurs, puis vérification via une regex qu'il n'y a que des dates
+	// Regex : suppression des retours à la lignes "(\r\n|\n|\r)" et des espaces inutiles "(\s )+"
+	var concatAllValues = listeDesLignesDansLaColonne.text().replace(/((\r\n|\n|\r)(\s )+)/gm, CONST_CHAINE_VIDE);
+	var allValuesAreDates = concatAllValues.match("( [0-9]{2}/[0-9]{2}/[0-9]{4})+");
+	var allValuesAreTimeStamps = concatAllValues.match("( [0-9]{2}/[0-9]{2}/[0-9]{4} [0-2][0-9]:[0-5][0-9])+");
+	// Teste si la colonne est une colonne de nombres : concaténation de toutes les valeurs, suppression des espaces inutiles et vérification via une regex
+	var concatAllValuesForNumbers = concatAllValues.replace(/\s/gm, CONST_CHAINE_VIDE); // Regex : suppression des espaces restant
+	
+	var allValuesAreNumbers = concatAllValuesForNumbers.match("^[0-9]([0-9]|,|\\.)*$"); // Mini correction de la regex : il faut échapper doublement le point dans une string
+
+	var allValuesArePrices  = concatAllValuesForNumbers.match("^[0-9]([0-9]|,|\\.|[A-Z]{3})*$"); // Correction pour prendre en compte les devises et trier les colonnes de montants
+	
+	//[TODO : à valider] var allValuesAreNumbers = concatAllValuesForNumbers.match("^(-[0-9]|[0-9]|,|\\.)+$"); // Correction de la détection des chaines numériques
+	//[TODO : à valider] var allValuesAreNumbers = concatAllValuesForNumbers.match("^(-[0-9]|[0-9])([0-9]|,|\.|-)*$"); // Correction de la détection des chaines numériques (mieux)
+	
+	var isForSyntheseDroit = concatAllValuesForNumbers.match("^([0-9]|,|\\.|[A-Z]{3}|" + 
+																CONST_SYNTHESE_DROIT_LABEL_SANS_PLAFOND.replace(CONST_ESPACE, CONST_CHAINE_VIDE) +
+																"|" + CONST_SYNTHESE_DROIT_TIRET
+																+ ")+$");
+
+
+	var value, tabDate;
+	
+	if (!! isForSyntheseDroit && (concatAllValuesForNumbers === isForSyntheseDroit[0])      // S'il y a concordance et si le motif est identique à celui de départ
+			&& ( 
+					concatAllValues.search(CONST_SYNTHESE_DROIT_LABEL_SANS_PLAFOND) > 0 ||  // s'il y a présence de "Sans plafond"
+					concatAllValues.search(CONST_SYNTHESE_DROIT_TIRET) > 0 					// ou d'un tiret "-"
+				)
+	)
+	{
+		 // Tri personnalisé pour la gestion des pouvoirs - Synthèse des droits par abonné
+		
+		var columnValue = CONST_CHAINE_VIDE;
+		
+		// Parcours de chaque ligne de la colonne
+		listeDesLignesDansLaColonne.each(
+			function (index)
+			{
+				columnValue = $(this).text().trim(); // Récupération de la valeur et suppression des espaces inutiles
+				
+				if (columnValue === CONST_SYNTHESE_DROIT_LABEL_SANS_PLAFOND) // Apparaitra en 1er dans la liste triée par ordre croissant
+				{
+					$(this).attr(CONST_CLASS_SORT_PARAM, -100);  // Valeur arbitraire suffiamment "basse"
+				}
+				else if (columnValue === CONST_SYNTHESE_DROIT_TIRET) // Apparaitra en 2e dans la liste triée par ordre croissant
+				{
+					$(this).attr(CONST_CLASS_SORT_PARAM, -10);  // Valeur arbitraire moins "basse" que la précédente
+				}
+				else 
+				{
+					// Conversion du [nombre + devise] en [nombre]
+					value = columnValue.split(CONST_ESPACE)[0];
+					value = convertToNumberFix2(value);
+					$(this).attr(CONST_CLASS_SORT_PARAM, value);
+				}
+			}
+		);
+
+		// MAJ du Header avec la classe associée à la synthèse des droits... et aussi aux nombres
+		$(th).addClass(CONST_COL_IS_CUSTOM_SYNTHESE_DROIT);
+		$(th).addClass(CONST_COL_IS_NUMBER);
+
+	}
+	else if (!! allValuesAreDates && (concatAllValues === allValuesAreDates[0])) // Colonne de dates
+	{
+		// Transformation de la valeur de chaque item en un format triable (dd/mm/yyyy => yyyymmdd) et sauvegarde dans les attributs
+		listeDesLignesDansLaColonne.each(
+			function (index)
+			{
+				value = $(this).text().trim().replace(/((\r\n|\n|\r)(\s )+)/gm, CONST_CHAINE_VIDE); // suppression de tous les sauts de ligne
+				tabDate = value.split("/");
+				value = tabDate[2] + tabDate[1] + tabDate[0]; // reconstitution de la date
+				$(this).attr(CONST_CLASS_SORT_PARAM, value);
+			}
+		);
+
+		// MAJ du Header avec la classe associée aux dates
+		$(th).addClass(CONST_COL_IS_DATE);
+	}
+	else if (!! allValuesAreTimeStamps && (concatAllValues.trim() === allValuesAreTimeStamps[0].trim())) // Colonne de dates
+	{
+		 
+			// Transformation de la valeur de chaque item en un format triable (dd/mm/yyyy hh:mm => yyyymmddhhmm) et sauvegarde dans les attributs
+			listeDesLignesDansLaColonne.each(
+				function (index)
+				{
+					value = $(this).text().trim().replace(/((\r\n|\n|\r)(\s )+)/gm, CONST_CHAINE_VIDE); // suppression de tous les sauts de ligne
+					if(!!value){
+						dateHeure=value.split(" ");
+						heures = dateHeure[1];
+						date = dateHeure[0];
+						tabDate=date.split("/");
+						tabHeures = heures.split(":");
+						value = tabDate[2] + tabDate[1] + tabDate[0] + tabHeures[0] + tabHeures[1]; // reconstitution de la date
+					}else{
+						value="";
+					}
+					$(this).attr(CONST_CLASS_SORT_PARAM, value);
+					
+				}
+			);
+
+			// MAJ du Header avec la classe associée aux dates
+			$(th).addClass(CONST_COL_IS_TIMESTAMP);
+		}
+	else if (  // Colonne de nombres ou de montants
+			(!! allValuesAreNumbers)  && (concatAllValuesForNumbers === allValuesAreNumbers[0])
+											|| 
+			(!! allValuesArePrices )  && (concatAllValuesForNumbers === allValuesArePrices[0])
+	) 
+	{
+		// Transformation de la valeur de chaque item en un format triable et sauvegarde dans les attributs
+		listeDesLignesDansLaColonne.each(
+			function (index)
+			{
+				value = convertToNumberFix2($(this).text());
+				$(this).attr(CONST_CLASS_SORT_PARAM, value);
+			}
+		);
+
+		// MAJ du Header avec la classe associée aux nombres
+		$(th).addClass(CONST_COL_IS_NUMBER);
+
+		// MAJ du Header avec la classe associée aux montants
+		if (allValuesArePrices)
+		{
+			$(th).addClass(CONST_COL_IS_PRICE);
+		}
+	}
+	else // Colonne de texte
+	{
+		listeDesLignesDansLaColonne.each(
+			function (index)
+			{
+				value = $(this).text().trim();
+				value = replaceDiacritics(value); // Suppression de tous les accents et caractères spéciaux puis transformation en minuscules
+				$(this).attr(CONST_CLASS_SORT_PARAM, value);
+			}
+		);
+
+		// MAJ du Header avec la classe associée aux textes
+		$(th).addClass(CONST_COL_IS_TEXT);
+	}
+
+}
+
+
+/**
+ * Retire le lien ATE sur les en-têtes du tableau précisé en paramètres, tout en conservant la mise en forme
+ */
+function suprimerTriATEsurTableau(nomDuTableau)
+{
+
+	var nomColonne, nouveauTitre, jqTableID, divs, th, regex;
+	
+	// Parcours des titres
+	jqTableID = "#" + nomDuTableau;
+
+	divs = $(jqTableID + " th:has('a')");
+
+	for (i = 0; i < divs.length; i++)
+	{
+		th = divs[i];
+
+		regex = th.innerHTML.match('<a [^>]+>([^<]+)<\/a>'); // regex pour les liens html
+
+		if ( !! regex )
+		{
+			nomColonne = regex[1];
+		}
+		else
+		{
+			nomColonne = th.innerText;
+		}
+		var aLink = $(th).find("a").first();
+		
+		nouveauTitre = 	"  <a  class=' " +aLink.attr('class')+" "+
+										CONST_CLASS_SORT_COL + CONST_ESPACE +
+										CONST_CLASS_SORT_UNDEF +
+										"' onclick=callSortTable('" + th.id + "');> " +
+										nomColonne  +
+						"  </a> ";
+
+		th.innerHTML = nouveauTitre;
+
+		autoDetectColType(jqTableID, th);
+
+	}
+
+}
+
+
+/**
+ * Parcourt tous les en-têtes de tous les tableaux de la page et retire le lien ATE
+ * tout en conservant la mise en forme
+ */
+function supprimerTriATEtousLesTableaux()
+{
+	// Scan des tableaux de la page
+	$(".tbl").each(
+		function(index)
+		{
+			suprimerTriATEsurTableau(this.id);
+		}
+	);
+}
+
+/**
+ * Parcourt tous les en-têtes du 1er tableau trouvé et retire le lien ATE
+ * tout en conservant la mise en forme
+ * 
+ * TODO : à renommer (sans ajouter de regression => revoir toutes les JSP appelant cette fonction)
+ */
+function supprimerTriATE()
+{
+	// Scan du 1er tableau de la page
+	$(".tbl:first").each(
+		function(index)
+		{
+			suprimerTriATEsurTableau(this.id);
+		}
+	);
+}
+
+/**
+ * Remet sur le titre des colonnes les images de tri par défaut (flêche haut et bas)
+ *
+ * @param table		Javascript Object	Table à mettre à jour
+ * @param th		Jquery Object		Header de la colonne du tableau
+ */
+function razImagesTriColonnes(table, th)
+{
+	if (!table)
+	{
+		return false;
+	}
+
+	// RAZ de l'image de tri des colonnes
+	
+	$("#" + table.id + " th a")
+		.removeClass(CONST_CLASS_SORT_ASC + CONST_ESPACE + CONST_CLASS_SORT_DESC)
+		.addClass(CONST_CLASS_SORT_UNDEF);
+
+	// Suppression de l'indicateur du filtre des (autres) colonnes
+	var exceptCol = CONST_CHAINE_VIDE;
+	if (!!th)
+	{
+		exceptCol = ":not([id='" + th.id + "']) ";
+	}
+	delete $("#" + table.id + " th" + exceptCol + " a").asc;
+}
+
+
+/**
+ * Fonction appelée lors du clic sur le titre d'une colonne (compatibilité IE)
+ *
+ * @param columnID		String	l'ID de la colonne
+ */
+function callSortTable(columnID)
+{
+	if (!!columnID )
+	{
+		var columnList = $("#" + columnID);
+		var tableList = columnList.closest("table");
+
+		triColonne(tableList[0], columnList[0]);
+	}
+}
+
+/**
+ * Tri les données de la colonne
+ *
+ * @param table		Javascript Object	Table à mettre à jour
+ * @param th		Jquery Object		Header de la colonne du tableau
+ */
+function triColonne(table, th)
+{
+	if ( (! table) || (! th) )
+	{
+		return false;
+	}
+
+	// Suppression du style des lignes paires et impaires
+	$("#" + table.id + " tr").removeClass("even odd");
+
+	var aTh = $("#" + th.id + " > a")[0];
+	var tbody = $("#" + table.id + " > tbody");
+
+	razImagesTriColonnes(table, th);
+
+	/**
+	 * Source - debut
+	 * https://stackoverflow.com/questions/14267781/sorting-html-table-with-javascript/49041392#49041392
+	 */
+	Array.from(  // Crée un tableau contenant toutes les colonnes
+				table.querySelectorAll("tbody tr:not([style='display: none;'])")
+			  )
+			  .sort( // Tri du tableau via la fonction de comparaison définie ci-dessous
+					  comparer(
+							  Array.from(th.parentNode.children).indexOf(th), th.asc = !th.asc // => "th.asc = !th.asc" recupère l'état inverse du tri en cours puis le sauvegarde pour le prochain clic
+							  )
+				   )
+					.forEach( // MAJ du tbody en fonction du nouvel ordre
+								function(tr)
+								{
+									tbody.append(tr);
+								}
+							);
+	/**
+	 * Source - fin
+	 */
+
+	// MAJ de l'image de tri de colonne demandée
+	if (th.asc)
+	{
+		aTh.classList.add(CONST_CLASS_SORT_ASC);
+	}
+	else
+	{
+		aTh.classList.add(CONST_CLASS_SORT_DESC);
+	}
+	aTh.classList.remove(CONST_CLASS_SORT_UNDEF);
+
+
+	// RAZ du style des lignes paires et impaires
+	//    Attention, la ligne 0 (intitulés) n'est pas comptée :
+	//    donc la ligne 1 (impaire) devient la ligne 0 des données (paire)
+	$("#" + table.id + " tr:visible:odd").addClass("even");
+	//    et la ligne 2 (paire) devient la ligne 1 des données (impaire)
+	$("#" + table.id + " tr:visible:even:not(:first())").addClass("odd");
+
+
+}
+
+
+/**
+ * Fonctions utiles aux tris
+ *
+ * Source - debut
+ * https://stackoverflow.com/questions/14267781/sorting-html-table-with-javascript/49041392#49041392
+ */
+var getCellValue = 	function(tr, idx)
+					{
+						return $(tr.children[idx]).attr(CONST_CLASS_SORT_PARAM);
+					};
+
+var comparer = 	function(idx, asc)
+				{
+					return 	function(a, b)
+							{
+								return 	function(v1, v2)
+										{
+											return 	v1 !== '' 	&&
+													v2 !== '' 	&&
+													! isNaN(v1) &&
+													! isNaN(v2) ? v1 - v2 : v1.toString().localeCompare(v2);
+										}
+										(
+											getCellValue(asc ? a : b, idx), getCellValue(asc ? b : a, idx)
+										);
+							}
+				};
+/**
+ * Source - fin
+ */
+
+
+
+/**
+ * Compatibilité avec IE, si la fonction Array.from n'existe pas
+ * Source - debut
+ * : https://stackoverflow.com/questions/36810940/array-from-on-the-internet-explorer
+ */
+
+if (!Array.from) {
+  Array.from = (function () {
+    var toStr = Object.prototype.toString;
+    var isCallable = function (fn) {
+      return typeof fn === 'function' || toStr.call(fn) === '[object Function]';
+    };
+    var toInteger = function (value) {
+      var number = Number(value);
+      if (isNaN(number)) { return 0; }
+      if (number === 0 || !isFinite(number)) { return number; }
+      return (number > 0 ? 1 : -1) * Math.floor(Math.abs(number));
+    };
+    var maxSafeInteger = Math.pow(2, 53) - 1;
+    var toLength = function (value) {
+      var len = toInteger(value);
+      return Math.min(Math.max(len, 0), maxSafeInteger);
+    };
+
+    // The length property of the from method is 1.
+    return function from(arrayLike/*, mapFn, thisArg */) {
+      // 1. Let C be the this value.
+      var C = this;
+
+      // 2. Let items be ToObject(arrayLike).
+      var items = Object(arrayLike);
+
+      // 3. ReturnIfAbrupt(items).
+      if (arrayLike == null) {
+        throw new TypeError("Array.from requires an array-like object - not null or undefined");
+      }
+
+      // 4. If mapfn is undefined, then let mapping be false.
+      var mapFn = arguments.length > 1 ? arguments[1] : void undefined;
+      var T;
+      if (typeof mapFn !== 'undefined') {
+        // 5. else
+        // 5. a If IsCallable(mapfn) is false, throw a TypeError exception.
+        if (!isCallable(mapFn)) {
+          throw new TypeError('Array.from: when provided, the second argument must be a function');
+        }
+
+        // 5. b. If thisArg was supplied, let T be thisArg; else let T be undefined.
+        if (arguments.length > 2) {
+          T = arguments[2];
+        }
+      }
+
+      // 10. Let lenValue be Get(items, "length").
+      // 11. Let len be ToLength(lenValue).
+      var len = toLength(items.length);
+
+      // 13. If IsConstructor(C) is true, then
+      // 13. a. Let A be the result of calling the [[Construct]] internal method of C with an argument list containing the single item len.
+      // 14. a. Else, Let A be ArrayCreate(len).
+      var A = isCallable(C) ? Object(new C(len)) : new Array(len);
+
+      // 16. Let k be 0.
+      var k = 0;
+      // 17. Repeat, while k < len... (also steps a - h)
+      var kValue;
+      while (k < len) {
+        kValue = items[k];
+        if (mapFn) {
+          A[k] = typeof T === 'undefined' ? mapFn(kValue, k) : mapFn.call(T, kValue, k);
+        } else {
+          A[k] = kValue;
+        }
+        k += 1;
+      }
+      // 18. Let putStatus be Put(A, "length", len, true).
+      A.length = len;
+      // 20. Return A.
+      return A;
+    };
+  }());
+}
+/**
+ * Source - fin
+ */
+
+
+/**
+ * Fonctions ajoutant les tris sur les différents tableaux lorsque la fenêtre est chargée
+ */
+
+function ajouterTriTableaux()
+{
+	window.addEventListener("SCRIPT_RECHERCHE_DYN_LOADED", function(event){
+		try{
+			supprimerTriATE();
+		}catch (error) {
+			console.log(error.stack);
+		}
+	});
+	 			
+}
+
+function ajouterTriTousLesTableaux()
+{
+	
+	window.addEventListener("SCRIPT_RECHERCHE_DYN_LOADED", function(event){
+		try{
+			supprimerTriATEtousLesTableaux();
+		}catch (error) {
+			console.log(error.stack);
+		}
+		
+	});
+	
+	
+}
+function ajouterTriSurTableau(nomTableau)
+{
+	window.addEventListener("SCRIPT_RECHERCHE_DYN_LOADED", function(event){
+		try{
+			suprimerTriATEsurTableau(nomTableau);
+		}catch (error) {
+			console.log(error.stack);
+		}
+		
+	});
+}
+//=== ITUANGK - S3 - recherche dynamique - fin
+
+
+/**
+ * Clique sur la première colonne du tableau passé en paramètre
+ * 
+ * @params nomTableau	String		Nom du tableau
+ * 
+ * TODO : créer une fonction permettant de cliquer sur n'importe quelle colonne d'un tableau (via un index ou son nom)
+ */
+function clicPremiereColonneTableau(nomTableau)
+{
+	window.addEventListener("SCRIPT_RECHERCHE_DYN_LOADED", function(event){
+		try{
+			$("#" + nomTableau + " th:first span")[0].click();
+		}catch (error) {
+			console.log(error.stack);
+		}
+		
+	});
+	
+}
+
+
+
+
+/**
+ * Nettoie les accents d'une chaine de caractères. Attention : ne conserve pas la casse
+ * 
+ * Source : https://github.com/yvg/js-replace-diacritics/blob/master/replace-diacritics.js
+ */
+function replaceDiacritics(str) 
+{
+	var alphabet = { a:/[\u0061\u24D0\uFF41\u1E9A\u00E0\u00E1\u00E2\u1EA7\u1EA5\u1EAB\u1EA9\u00E3\u0101\u0103\u1EB1\u1EAF\u1EB5\u1EB3\u0227\u01E1\u00E4\u01DF\u1EA3\u00E5\u01FB\u01CE\u0201\u0203\u1EA1\u1EAD\u1EB7\u1E01\u0105\u2C65\u0250]/ig,
+		    aa:/[\uA733]/ig,
+		    ae:/[\u00E6\u01FD\u01E3]/ig,
+		    ao:/[\uA735]/ig,
+		    au:/[\uA737]/ig,
+		    av:/[\uA739\uA73B]/ig,
+		    ay:/[\uA73D]/ig,
+		    b:/[\u0062\u24D1\uFF42\u1E03\u1E05\u1E07\u0180\u0183\u0253]/ig,
+		    c:/[\u0063\u24D2\uFF43\u0107\u0109\u010B\u010D\u00E7\u1E09\u0188\u023C\uA73F\u2184]/ig,
+		    d:/[\u0064\u24D3\uFF44\u1E0B\u010F\u1E0D\u1E11\u1E13\u1E0F\u0111\u018C\u0256\u0257\uA77A]/ig,
+		    dz:/[\u01F3\u01C6]/ig,
+		    e:/[\u0065\u24D4\uFF45\u00E8\u00E9\u00EA\u1EC1\u1EBF\u1EC5\u1EC3\u1EBD\u0113\u1E15\u1E17\u0115\u0117\u00EB\u1EBB\u011B\u0205\u0207\u1EB9\u1EC7\u0229\u1E1D\u0119\u1E19\u1E1B\u0247\u025B\u01DD]/ig,
+		    f:/[\u0066\u24D5\uFF46\u1E1F\u0192\uA77C]/ig,
+		    g:/[\u0067\u24D6\uFF47\u01F5\u011D\u1E21\u011F\u0121\u01E7\u0123\u01E5\u0260\uA7A1\u1D79\uA77F]/ig,
+		    h:/[\u0068\u24D7\uFF48\u0125\u1E23\u1E27\u021F\u1E25\u1E29\u1E2B\u1E96\u0127\u2C68\u2C76\u0265]/ig,
+		    hv:/[\u0195]/ig,
+		    i:/[\u0069\u24D8\uFF49\u00EC\u00ED\u00EE\u0129\u012B\u012D\u00EF\u1E2F\u1EC9\u01D0\u0209\u020B\u1ECB\u012F\u1E2D\u0268\u0131]/ig,
+		    j:/[\u006A\u24D9\uFF4A\u0135\u01F0\u0249]/ig,
+		    k:/[\u006B\u24DA\uFF4B\u1E31\u01E9\u1E33\u0137\u1E35\u0199\u2C6A\uA741\uA743\uA745\uA7A3]/ig,
+		    l:/[\u006C\u24DB\uFF4C\u0140\u013A\u013E\u1E37\u1E39\u013C\u1E3D\u1E3B\u017F\u0142\u019A\u026B\u2C61\uA749\uA781\uA747]/ig,
+		    lj:/[\u01C9]/ig,
+		    m:/[\u006D\u24DC\uFF4D\u1E3F\u1E41\u1E43\u0271\u026F]/ig,
+		    n:/[\u006E\u24DD\uFF4E\u01F9\u0144\u00F1\u1E45\u0148\u1E47\u0146\u1E4B\u1E49\u019E\u0272\u0149\uA791\uA7A5]/ig,
+		    nj:/[\u01CC]/ig,
+		    o:/[\u006F\u24DE\uFF4F\u00F2\u00F3\u00F4\u1ED3\u1ED1\u1ED7\u1ED5\u00F5\u1E4D\u022D\u1E4F\u014D\u1E51\u1E53\u014F\u022F\u0231\u00F6\u022B\u1ECF\u0151\u01D2\u020D\u020F\u01A1\u1EDD\u1EDB\u1EE1\u1EDF\u1EE3\u1ECD\u1ED9\u01EB\u01ED\u00F8\u01FF\u0254\uA74B\uA74D\u0275]/ig,
+		    oi:/[\u01A3]/ig,
+		    ou:/[\u0223]/ig,
+		    oo:/[\uA74F]/ig,
+		    oe:/[\u0153]/ig,
+		    p:/[\u0070\u24DF\uFF50\u1E55\u1E57\u01A5\u1D7D\uA751\uA753\uA755]/ig,
+		    q:/[\u0071\u24E0\uFF51\u024B\uA757\uA759]/ig,
+		    r:/[\u0072\u24E1\uFF52\u0155\u1E59\u0159\u0211\u0213\u1E5B\u1E5D\u0157\u1E5F\u024D\u027D\uA75B\uA7A7\uA783]/ig,
+		    s:/[\u0073\u24E2\uFF53\u015B\u1E65\u015D\u1E61\u0161\u1E67\u1E63\u1E69\u0219\u015F\u023F\uA7A9\uA785\u1E9B]/ig,
+		    ss:/[\u00DF\u1E9E]/ig,
+		    t:/[\u0074\u24E3\uFF54\u1E6B\u1E97\u0165\u1E6D\u021B\u0163\u1E71\u1E6F\u0167\u01AD\u0288\u2C66\uA787]/ig,
+		    tz:/[\uA729]/ig,
+		    u:/[\u0075\u24E4\uFF55\u00F9\u00FA\u00FB\u0169\u1E79\u016B\u1E7B\u016D\u00FC\u01DC\u01D8\u01D6\u01DA\u1EE7\u016F\u0171\u01D4\u0215\u0217\u01B0\u1EEB\u1EE9\u1EEF\u1EED\u1EF1\u1EE5\u1E73\u0173\u1E77\u1E75\u0289]/ig,
+		    v:/[\u0076\u24E5\uFF56\u1E7D\u1E7F\u028B\uA75F\u028C]/ig,
+		    vy:/[\uA761]/ig,
+		    w:/[\u0077\u24E6\uFF57\u1E81\u1E83\u0175\u1E87\u1E85\u1E98\u1E89\u2C73]/ig,
+		    x:/[\u0078\u24E7\uFF58\u1E8B\u1E8D]/ig,
+		    y:/[\u0079\u24E8\uFF59\u1EF3\u00FD\u0177\u1EF9\u0233\u1E8F\u00FF\u1EF7\u1E99\u1EF5\u01B4\u024F\u1EFF]/ig,
+		    z:/[\u007A\u24E9\uFF5A\u017A\u1E91\u017C\u017E\u1E93\u1E95\u01B6\u0225\u0240\u2C6C\uA763]/ig,
+		    '':/[\u0300\u0301\u0302\u0303\u0308]/ig
+		  };
+
+	for (var letter in alphabet) {
+		str = str.replace(alphabet[letter], letter);
+	}
+	
+	return str;
+};
+ 

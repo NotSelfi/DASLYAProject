@@ -1,0 +1,48 @@
+/**
+ * Feuille de styles des bannieres publicitaires.
+ *
+ * @author Frederic GILBERT
+ */
+
+/* style du conteneur de l'ecran applicatif et de la banniere publicitaire positionnee a droite */
+div.screenRbanCtr {
+	clear: left;
+	height: auto;
+	padding-bottom: 4px;
+	position: relative;
+}
+
+/* style du conteneur de la banniere publicitaire positionnee en haut */
+div.banner {
+	text-align: center;
+}
+
+/* style du conteneur de la banniere publicitaire positionnee en haut */
+div.tbanner {
+	clear: both;
+	margin-bottom: 5px;
+	text-align: center;
+}
+
+/* style du conteneur de la banniere publicitaire positionnee a droite */
+ div.rbanner {
+ 	margin-top: 1.5em;
+ 	padding: 0 1px 0 7px;
+ 	margin-bottom: 1px;
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+
+/* style des images integrees aux bannieres */
+div.banner img, div.rbanner img, div.banner object, div.rbanner object {
+	border: 0;
+	margin: 0;
+}
+
+/* style specifique a la banniere de droite */
+div.rbanner img, div.rbanner object {
+	
+	margin: 0 -1px 0; /* Regle le probleme de chevauchement sous IE */
+}
+

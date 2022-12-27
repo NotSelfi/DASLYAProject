@@ -1,0 +1,16 @@
+
+@media print{
+	.tableScroll[style] {
+	 
+	  overflow: visible !important;
+	  max-height: 100%!important;
+	  height: 100%!important;
+	  
+	 }
+	
+	.tableScroll th {
+	  position: relative;
+	  top: 0;
+	 
+	}
+}

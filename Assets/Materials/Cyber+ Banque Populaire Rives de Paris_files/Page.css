@@ -1,0 +1,369 @@
+/**
+ * Feuille de styles des principaux elements de la page HTML.
+ *
+ * @author Frederic GILBERT
+ */
+body {
+	margin: 5px 10px 0;
+}
+
+/* FF 1.5 : bordure des combos forcee a 1px */
+select {
+	border: 1px #a5a5a5 solid;
+}
+
+/* spacers a utiliser pour la gestion des floats */
+/* spacer utilise dans le tag bloc level 1*/
+p.spr {
+	clear: both;
+}
+
+/* spacer utilise dans les tags d'agencement */
+div.spr {
+	clear: both;
+	height: 0;
+	overflow: hidden;
+}
+
+/* style des iframe */
+.ifr {
+	width: 100%;
+	border: none;
+}
+
+/* Le panel (div ou iFrame) de pied de page lorsqu'il est indsere dans la page applicative*/
+#pf {
+	height: 2em;
+	margin-top: 15px;
+	overflow: hidden;
+}
+
+/** masque un element*/
+.msk {
+	display: none;
+}
+
+/** force l'affichage de la div */
+.unmsk {
+	display: block;
+}
+/** Le bloc d'alerte sur la necessite de configurer le navigateur IE pour accepter les popup de telechargement*/
+div#dwlAlertBlc {
+	padding-left: 4em;
+	margin-bottom: 1.5em;
+	background: url("../images/message/InfoMessage.png?v=wJtrcNu6Ehk7EkvIuHkYPyv4H7E.") no-repeat
+		left;
+	background-size: 5%;
+	width: 95%;
+	float: left;
+	clear: left;
+}
+
+span#dwlAlertMsg {
+	padding-top: 10px; /* pour centrer les texte sur le bouton*/
+	padding-right: 0.5em;
+	float: left;
+	
+}
+
+div#loadingApplet {
+	padding: 30px 0 0 35%;
+	background: url("../images/AppletLoadingBG.gif?v=EnbY5eR8bW1hfyKUieTjujJbCGk.");
+	background-color: white;
+	float: left;
+	width: 100%;
+	height: 50px;
+	display: block;
+}
+
+/*****************************************************************************************/
+/*** Specialisation des CSS de la skin par defaut INTERNET pour Internet           ***/
+/*****************************************************************************************/
+
+/* !ATTENTION! les URLs d'images de cette specialisation de skin doivent etre prefixees par ../../internet/images/ 
+ * car en PROD, la feuille de style utilisee est la feuille de style compilee placee dans /ibp/ate/skin/internet/css
+ */
+
+/************************************/
+/*** page applicative 		      ***/
+/************************************/
+body {
+	margin-top: 0px;
+	/*Annule les marges haut et droite pour le mode integre(ces marges sont imposees par le portail conteneur)*/
+	margin-right: 0px;
+	margin-left: 12px;
+}
+
+/************************************************************/
+/*** page applicative (univers sans telecommande)	      ***/
+/************************************************************/
+body.withoutControlPanel {
+	margin-left: 0px;/*Annule les marges gauches pour les pages applicatives dont l'univers ne necessite pas de telecommande*/
+}
+
+/************************************/
+/*** bloc niveau 0     		      ***/
+/************************************/
+
+/************************************/
+/*** bloc niveau 1         		  ***/
+/************************************/
+/* bloc niveau 1 - bloc titre */
+/* bloc niveau 1 - bloc filtre */
+div.b1 div.btit, div.b1 div.bfil {
+
+	padding-bottom: 8px !important;
+}
+
+div.b1 div.btit {
+	border-radius: 4px 0px 0 0;
+}
+
+div.b1 div.bfil {
+	border-radius: 0px 4px 0 0;
+}
+
+/* bloc niveau 1 - bloc sans filtre */
+/*div.b1 div.btit div.bnofil, div.b1 div.bnofil {*/
+	/*border-radius: 4px 4px 0 0;*/
+	/*border-top-right-radius: 4px 4px;*/
+/*}*/
+
+/************************************/
+/*** bloc niveau 2                ***/
+/************************************/
+div.b1 div.b2 div.btit {
+	background: none !important;
+	border-radius: 0 0 0 0;
+	padding-bottom: 0 !important;
+	padding-top: 0px !important;
+	padding-right: 0px;
+	padding-left: 0px;
+	width: 100%;
+	margin-bottom: -1px;
+	z-index: 1;
+	position: relative;
+}
+
+div.b1 div.b2 div.bfil {
+	border-radius: 0 0 0 0;
+	background: none !important;
+	padding-right: 2px;
+	padding-bottom: 8px !important;
+}
+
+div.b1 div.b2 div.b2titcnt {
+	padding-right: 2.6em;
+	padding-left: 6px;
+	padding-top: 5px;
+}
+
+div.b2titcnt {
+	color: #080d33;
+}
+
+div.b1 div.b2 div.b2titfil {
+	float: right;
+	z-index: 2;
+	position: relative;
+	margin-top: 0px;
+	height: 1.5em;
+}
+
+div.b2 div.btit {
+	color: #080d33 !important;
+}
+
+/************************************/
+/*** bloc borderless              ***/
+/************************************/
+div.bb div.btit {
+	/* Le important! est necessaire pour imposer cette couleur au bloc de niveau 2 car les extension par segment 
+	   surcharge le style des titre de bloc de niv1 qui par heritage surcharge egalement ce style sur le bloc de niveau 2*/
+	/*background: transparent !important;*/
+	/*color: #009FE0 !important;*/
+	border-radius: 0 0 0 0;
+}
+
+/************************************/
+/*** Boutons		              ***/
+/************************************/
+
+/* Specification de la visualisation d'un bouton d'action.  
+	Heritage de propriete communes pour ses differents etat : survole(.high), selectionne(.sel), desactive (-dis), avec image (img, imgva)
+*/
+/*.btn, .btn.high, .btn.sel, .btn:hover, .btn:focus {
+	border: solid 1px #C93269;
+	border-radius: 12px 12px 12px 12px;
+	background: #C93269;
+	background: -webkit-gradient(linear, left top, left bottom, from(#EA4F89),
+		to(#C93269));
+	background: -webkit-linear-gradient(#EA4F89, #C93269);
+	background: -o-linear-gradient(#EA4F89, #C93269);
+	background: linear-gradient(#EA4F89, #C93269);
+	!* filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#EA4F89', endColorstr='#C93269',GradientType=0 ); *!
+	!* IE6-9 *!
+	padding-bottom: 1px !important;
+	padding-top: 1px !important;
+}*/
+
+button.btn .btntxt {
+	color: #fff;
+}
+
+button.tile .btntxt {
+	color: #000000;
+	vertical-align: middle;
+	overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+button.tile .btnimg {
+	vertical-align: middle;
+}
+
+/* Bouton desactive*/
+.btn.dis, .btn.dis:hover, .btn.dis.high:hover {
+	/*border: solid 1px #cccccc;*/
+	/* border-radius: 12px 12px 12px 12px; */ 
+	border-radius: 5px;
+	background: #cccccc;
+	/* padding-bottom: 1px !important; */
+	/* padding-top: 1px !important; */
+}
+
+.btn.dis span.btntxt, .btn.dis:hover span.btntxt {
+	color: #ffffff;
+	background: transparent;
+}
+
+/* action type secondary */
+.btn.sec, .btn.sec.high, .btn.sec:hover, .btn.sec:focus {
+	/*border: solid 1px #999999;*/
+	/*border-radius: 12px 12px 12px 12px;*/
+	/*background: #FFFFFF;*/
+	/*!* Couleur par defaut, si pas ge gestion des gradients *!*/
+	/*background: -webkit-gradient(linear, left top, left bottom, color-stop(50%, #FFFFFF),*/
+		/*to(#999999));*/
+	/*background: -webkit-linear-gradient(#FFFFFF 50%, #999999);*/
+	/*background: -o-linear-gradient(#FFFFFF 50%, #999999);*/
+	/*background: linear-gradient(#FFFFFF 50%, #999999);*/
+}
+
+.btn.sec.sel {
+	background: -webkit-gradient(linear, left top, left bottom, from(#999999),
+		color-stop(50%, #FFFFFF));
+	background: -webkit-linear-gradient(#999999, #FFFFFF 50%);
+	background: -o-linear-gradient(#999999, #FFFFFF 50%);
+	background: linear-gradient(#999999, #FFFFFF 50%);
+}
+
+.btn.sec span.btntxt, .btn.sec:hover span.btntxt {
+	color: #ffffff;
+}
+
+/* action type link */
+.btn.link {	
+	color: transparent !important; 
+	background-color: transparent !important;
+	background-image: none !important;
+	border-color: transparent !important;	
+}
+
+.btn.link span.btntxt {
+	color: #051B71;
+	text-decoration:underline;	
+	padding: 0;
+}
+
+
+/************************************/
+/*** Champs de saisie  			  ***/
+/************************************/
+
+/* Rendu du champ obligatoire */
+div.required input, td.required input {
+	background-color: #F1EDE7;
+}
+/* Rendu du textarea obligatoire dans un Tag Layout*/
+div.required textarea, td.required textarea {
+	background-color: #f8f9fb;
+}
+/* Rendu des combos obligatoires dans un Tag Layout*/
+div.required select, td.required select {
+	background-color: #f8f9fb;
+}
+
+/****************************************************************/
+/*** Date/Calendrier                                          ***/
+/****************************************************************/
+div#calBody {
+	background-color: #051B71;
+}
+
+div#calBody table thead td {
+	background-color: #051B71;
+}
+
+div#calBody table tbody td {
+	background-color: #ECECEC;
+}
+
+div#calBody table tbody td.calday {
+	color: #051B71;
+}
+
+div#calBody tbody td.calday_sel, div#calBody tbody td.caldaywe_sel {
+	color: #051B71;
+}
+
+div#calBody tbody td.calday_high, div#calBody tbody td.caldaywe_high {
+	background-color: #051B71;
+}
+
+/****************************************************************/
+/*** Zone d'outils de la page applicative                     ***/
+/****************************************************************/
+/* Barre d'outils d'une page applicative .     */
+/* Doit etre alignee sur le titre de niveau 0. */
+#appPageToolsArea {
+	margin-top: 10px;
+    height: 18px;
+    float: right;
+}
+
+/* La zone preveant que des champs sont obligatoires */
+/* doit etre affichee juste sous la barre d'outils.  */
+span#mandatoryMessageZone {
+	float: none !important;
+	clear: both;
+	text-align: right;
+	margin-top: 0px;
+	margin-bottom: 10px;
+	position: relative;
+	bottom: 0px;
+	display: block;
+	font-weight: normal;
+	font-size: 12px;
+}
+
+/* Un spacer specifique a la barre d'outils pour s'assurer        */
+/* que l'ecart entre le titre et le contenu reste le meme qu'avant.*/
+div#spcToolsArea {
+	clear: both;
+}
+
+/* On garde une marge sous le titre de niveau 0 pour s'assurer qu'un ecart */
+/* sera toujours present meme sans barre d'outils                          */
+div.b0 > div.btit {
+	margin-bottom: 30px;
+}
+
+/* On ne veut pas que l'instruction css du dessus s'applique aux titres de niveau 1 */
+div.b0 div.b1  > div.btit {
+	margin-bottom: 10px;
+	padding-bottom: 0 !important;
+}
+
+

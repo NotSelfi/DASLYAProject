@@ -1,0 +1,497 @@
+
+	// === ITUANGK - S3 - recherche dynamique - début - Optimisation et nettoyage de code
+	
+	
+	var CONST_FILTER_ID_BASE = "valFiltreTable_";
+	var CONST_FILTER_ID_IMG_RAZ = CONST_FILTER_ID_BASE + "Img_";
+	var CONST_FILTER_CLASS = "inputValFiltreTable";
+	var CONST_FILTER_VALUE_SAVED_NAME = "_savedFilterValue_";
+	
+	var CONST_CHECKBOX_NEW_PREFIX = "New";
+	var CONST_CHECKBOX_BASE_END_SPLIT = "allO";
+	var CONST_CHECKBOX_CLASS = "cbxTab";
+	var CONST_CHECKBOX_BASE_END = "_" + CONST_CHECKBOX_BASE_END_SPLIT;
+	
+	var CONST_ITEM_INVISIBLE = "msk";
+	var CONST_ITEM_VISIBLE = "un" + CONST_ITEM_INVISIBLE;
+	
+	var CONST_CLASS_LOADED = "loaded";
+	var CONST_ID_EMPTY_LINE = "emptyLine";
+
+	
+	var CONST_MESSAGE_ERREUR_AUCUN_RESULTAT = "Aucun résultat pour la recherche..." ;
+	// === ITUANGK - S3 - fin
+
+	// === ITUANGK - US 03.a - debut - Gestion de la multisélection avec le filtre de recherche
+	/**
+	 * Ecrase le fonctionnement par défaut du framework equinoxe afin de gérer la sélection globale après
+	 * un filtre de recherche.
+	 *
+	 * Algo :
+	 *   - Suppression des deux images correspondant à la checkbox
+	 *   - Création de deux nouvelles images, avec des ID différents
+	 *   - Affectation de nouveaux évenements, pour éviter les conflits et ceux créés par le framework
+	 *
+	 * @param checkboxID String ID de la checkbox (dé)sélectionner tout
+	 **/
+	function manageCheckboxSelectAll(checkboxID)
+	{
+		// Seules les checkboxes dont l'ID est de la forme "abcdef...yz_allON" ou "abcdef...yz_allOFF" sont gérées
+		var tmp = checkboxID.split("_");
+		if (tmp.length > 0)
+		{
+			// Détermination du type de checkbox : ON ou OFF ?
+			var onOrOff = tmp[tmp.length - 1].split(CONST_CHECKBOX_BASE_END_SPLIT);
+			
+			if (onOrOff.length > 0)
+			{
+				onOrOff = onOrOff[onOrOff.length-1];
+				
+				// Sauvegarde des caractéristiques des anciennes images de checkboxes
+				var cellSelectAll = $("#" + checkboxID).parent(); // localisation de la checkbox
+				var title = $("#" + checkboxID).attr("title");
+				var checkboxImg = $("#" + checkboxID).attr("src");
+				var classe = $("#" + checkboxID).attr("class");
+				
+				// Détermination des caractéristiques des nouvelles images de checkboxes
+				var checkboxIDNew = tmp[0] + CONST_CHECKBOX_NEW_PREFIX + CONST_CHECKBOX_BASE_END;
+				checkboxIDNew = checkboxIDNew + onOrOff.toUpperCase();
+				
+				// Récupération des lignes sélectionnées
+				var allOrNone = ".sel";
+				var selectAll = false;
+				
+				// S'il s'agit de la checkbox OFF ("Sélectionner tout")
+				// Récupération des lignes désélectionnées
+				if (onOrOff.toUpperCase() != "N")
+				{
+					allOrNone = ":not(" + allOrNone + ")";
+					selectAll = true;
+				}
+
+				// Suppression de l'ancienne image
+				$("#" + checkboxID).remove();
+				
+				// Création de la nouvelle
+				cellSelectAll.append('<img src="' + checkboxImg + '" id="' + checkboxIDNew + '" title="' + title + '" class="' + classe + '">');
+
+				// Ajout de l'événement de gestion
+				$("#" + checkboxIDNew).mousedown(
+					function()
+					{
+						// Récupération de l'ID du tableau associé
+						var tableID = $("#" + checkboxIDNew).closest("table")[0].id;
+						var table = $("#" + tableID);
+	
+						// [EDIT pour la performance] Changement de la propriété checked de toutes les checkboxes selon le critère de sélection ou non, excepté la dernière
+						var listeCheckboxesVisibles = table.find("tr[id]:visible" + allOrNone + " input:enabled." + CONST_CHECKBOX_CLASS);
+						var dernierElement = listeCheckboxesVisibles.last();
+						var listeElementsACliquer = listeCheckboxesVisibles.not(":last");
+						
+						listeElementsACliquer.prop("checked", selectAll);
+						listeElementsACliquer.closest("tr").toggleClass("sel");
+						
+						// Clic sur la dernière, afin d'activer ou non le bouton de validation
+						dernierElement.click();
+						
+						// Mise à jour de l'image de la checkbox
+						table.find("img." + CONST_ITEM_INVISIBLE).prop("class", CONST_ITEM_VISIBLE); // Tout en visible
+						$("#" + checkboxIDNew).prop("class", CONST_ITEM_INVISIBLE); // L'ancienne devient invisible
+					}
+				);
+			}
+		}
+	}
+	//=== ITUANGK - US 03.a - fin
+	
+	
+	// === ITUANGK - S3 - recherche dynamique - debut
+	/**
+	 * Renvoie le nom de l'écran en cours
+	 *
+	 * @returns String
+	 */
+	function getScreenName()
+	{
+		return $("input[type='hidden'][id='screenName']")[0].value;
+	}
+
+	/**
+	 * Renvoie le nom de la variable qui sauvegardera la valeur du filtre de recherche
+	 *
+	 * @returns String
+	 */
+	function getSaveFilterName(filterId)
+	{
+		return getScreenName() + CONST_FILTER_VALUE_SAVED_NAME + filterId;
+	}
+	
+	/**
+	 * Gestion de la persistence du filtre de recherche
+	 **/
+	function manageFilter(idtable)
+	{
+		// Sauvegarde de la valeur du filtre de recherche lorsque le focus sur le champ est perdu
+		$("#" + CONST_FILTER_ID_BASE + idtable).focusout(
+			function()
+			{
+				var filterValue = $("#" + CONST_FILTER_ID_BASE + idtable).val();
+												
+				if (!!filterValue)
+				{	
+					sessionStorage.setItem(getSaveFilterName(idtable), filterValue);
+				}
+			}
+		);
+		
+		// Après le tri, on remet le filtre
+		$(window).bind("load",
+    		function()
+		    {
+		    	// Parcours de tous les tableaux filtrables
+		    	$("input[class='" + CONST_FILTER_CLASS + "']").each(
+	    			function()
+	    			{
+	    				var filterID = this.id
+	    				
+	    				// Récupération de l'ID du tableau associé
+	    				var tblID = filterID.split("_")[1];
+	    				
+	    				// Récupération du filtre précédemment stocké
+	    				var filterValue = sessionStorage.getItem(getSaveFilterName(tblID));
+			    	
+			    	    // MAJ du filtre si une valeur précédente existe
+			    	    if (!!filterValue)
+			    	    {
+			    	    	$(this).val(filterValue);										    	
+				    	    $(this).change();
+			    	    }
+			    	}
+    			);
+		    }
+	    );
+	}
+	// === ITUANGK - S3 - recherche dynamique - fin
+
+	function resetFiltre(tableId)
+	{
+		$("#" + CONST_FILTER_ID_BASE + tableId).val("");
+		filterTableByRow(tableId);
+	}
+	
+	
+	function addfilterMulti(tableId) {
+		var table = $("#" + tableId);
+		
+		var div =  $("<div class='searchFieldTable'>");
+	
+		var nodeInput = $("<input>",
+							{
+								type:"text",
+								placeholder:"Rechercher...",
+								id: CONST_FILTER_ID_BASE + tableId,
+								class: CONST_FILTER_CLASS,
+								change: function(e)
+										{
+								           e.preventDefault();
+								           filterTableByRow(tableId);
+								        }
+							}
+						);
+		
+		
+		if ($("#" + tableId + " [id$=_Cell]").size() > 0)  // ITUANGK - US03.a - Activation du filtre s'il y a au moins une ligne
+		{
+			div.append(nodeInput);
+			div.insertBefore(table.parent());
+			$("#" + CONST_FILTER_ID_BASE + tableId).keyup(
+														delay(
+															function (e)
+															{
+														  		filterTableByRow(tableId);
+															}
+															, 500
+														) // ITUANGK - S3 - optimisation
+													);
+		}
+	}
+	
+	function delay(callback, ms)
+	{
+		var timer = 0;
+		return 	function()
+				{
+					var context = this;
+					var args = arguments;
+					
+					clearTimeout(timer);
+					timer = setTimeout(
+								function ()
+								{
+									callback.apply(context, args);
+								}
+								, ms || 0
+							);
+				};
+	}
+	
+	function filterTableByRow(tableId)
+	{
+        // === ITUANGK - S3 - recherche dynamique - début - optimisation
+
+		var jqSelectedTable = "#" + tableId;
+		var table = $(jqSelectedTable);
+		var find=false;
+		
+		
+		
+		var searchItem = $("#" + CONST_FILTER_ID_BASE + tableId);
+		var searchedInput = searchItem.val();
+
+		// Affichage de la croix pour remettre à zéro le filtre
+		var imgCroixRazFiltre = $("#" + CONST_FILTER_ID_IMG_RAZ + tableId);
+		if (! searchedInput)
+		{
+			find=true;
+			imgCroixRazFiltre.hide();
+		}
+		else
+		{
+			imgCroixRazFiltre.show();
+		}
+		
+		var tableRows = $(jqSelectedTable + " tr");
+		
+		// Suppression du style des lignes paires et impaires
+		tableRows.removeClass("even odd");
+		
+			
+		// Si un filtre est précisé, seules les lignes contenant les valeurs sont montrées
+		if (!! searchedInput)
+		{
+			var listOfValues = searchedInput.split(" ");
+			
+			var nbWordsFound, indexLine, indexCol, column, columnValue, value, indexValue, currentRowColumns;
+
+			// Parcours des lignes du tableau (la ligne 0 étant l'intitulé, on l'ignore)
+	        for (indexLine = 1; indexLine < tableRows.length; indexLine++)
+	        {
+				nbWordsFound = 0;
+	        	
+				// Parcours de la liste des valeurs séparées par un espace
+				for (indexValue = 0; indexValue < listOfValues.length; indexValue++)
+				{
+					value = listOfValues[indexValue].toLowerCase();
+					
+		        	// Parcours des colonnes du tableau
+					currentRowColumns = tableRows[indexLine].getElementsByTagName("td");
+
+		            if (! currentRowColumns.length) // S'il n'y a pas de colonne contenant des valeurs, on passe à la ligne suivante
+		            {
+		            	nbWordsFound = listOfValues.length;
+		            	break;
+		            }
+		            else
+		            {
+		            	// Optimisation pour IE et Safari ici : https://stackoverflow.com/questions/43622127/filtering-table-multiple-columns
+						for (indexCol = 0; indexCol < currentRowColumns.length; indexCol++)
+						{
+							column = currentRowColumns[indexCol];
+
+			            	// Comparaison de la valeur de la colonne à la valeur recherchée (si elle est visible)
+							if ( !!column.id && column.style.display != "none" && ! column.classList.contains(CONST_ITEM_INVISIBLE))
+							{
+				            	columnValue = $("#" + column.id + " span").text();
+				            	titleValue = $("#" + column.id + " span").attr('title');
+				            	
+				            	if(columnValue!=undefined && columnValue!=""){
+				            		columnValue = columnValue.replace(/\s/g, '');
+				            	}
+				            	
+				            	if(titleValue!= undefined && titleValue !="" ){
+				            		titleValue=titleValue.replace(/\s/g, '');
+				            		columnValue+=' '+titleValue;
+				            	}
+				            	
+				            	// Si le mot a été trouvé on passe au suivant
+				            	if ( columnValue.toLowerCase().indexOf(value) > -1)
+				            	{
+				            		nbWordsFound++;
+				            		break;
+				            	}
+				            	
+				            	
+				            	
+				            	// Si le mot a été trouvé on passe au suivant
+				            	if ( columnValue.toLowerCase().indexOf(value) > -1)
+				            	{
+				            		nbWordsFound++;
+				            		break;
+				            	}
+							}
+			            } // fin de la boucle sur les colonnes
+					}
+		        } // fin de la boucle sur les valeurs
+
+				// Si tous les mots ont été trouvés, on affiche la ligne
+				if (nbWordsFound == listOfValues.length)
+				{
+					find=true;
+                	tableRows[indexLine].style.display = "";
+                } else {
+                	tableRows[indexLine].style.display = "none";
+                }
+
+			} // fin de la boucle sur les lignes
+		}
+		else // reset du filtre s'il n'y a pas de valeur saisie
+		{
+			tableRows.each(
+					function(index)
+					{
+						this.style.display = "";
+				    }
+			);
+		}
+
+		// RAZ du style des lignes paires et impaires
+		//    Attention, la ligne 0 (intitulés) n'est pas comptée :
+		//    donc la ligne 1 (impaire) devient la ligne 0 des données (paire)
+		$(jqSelectedTable + " tr:visible:odd").addClass("even");
+		//    et la ligne 2 (paire) devient la ligne 1 des données (impaire)
+		$(jqSelectedTable + " tr:visible:even:not(:first())").addClass("odd");
+
+		// Suppression de l'éventuel message d'erreur si aucune ligne n'a été trouvée
+		table.find("#" + CONST_ID_EMPTY_LINE).remove();
+
+		// Si aucun résultat n'est renvoyé, on affiche un message
+		if (! find){
+			var tbody = table.first("tbody");
+			var thead = table.first("thead");
+			var nbCols = thead.find("th").length;
+			var emptyLine = $("<tr id='" + CONST_ID_EMPTY_LINE +
+									"' class='" + CONST_ID_EMPTY_LINE + "'>" +
+									" <td colspan=" + nbCols + ">" +
+										CONST_MESSAGE_ERREUR_AUCUN_RESULTAT +
+									" </td>" +
+							  "</tr>");
+			tbody.append(emptyLine);
+		}
+		// on resize la frame
+		parent.parent.TW().computeAppPortalHeight();
+
+		
+		// Après le filtrage, on remet les images de tri à indéfini
+		razImagesTriColonnes(table[0]);
+		
+		
+        // === ITUANGK - S3 - recherche dynamique - fin
+		
+	}
+
+		
+	function selectizeCombo(idListBox)
+	{
+		
+		// on verifie qu'il s'agit bien d'une liste deroulante
+		var item = $("select#" + idListBox)[0];
+		if(item!= undefined && item!=null){
+			var select=$(item);
+			var initWidth = select.outerWidth();
+			var initHeight = select.innerHeight();
+			
+			select.searchableSelect();
+			select.parent().find(".searchable-select").width(initWidth+5);
+			select.parent().find(".searchable-select-holder").height(initHeight-4);
+			if(select.css("background")!=""){
+				select.parent().find(".searchable-select-holder").css("background-image", select.css("background-image"));
+				select.parent().find(".searchable-select-holder").css("background-position", select.css("background-position"));
+				select.parent().find(".searchable-select-holder").css("background-repeat", select.css("background-repeat"));
+				select.parent().find(".searchable-select-holder").css("background-color", select.css("background-color"));
+			}
+			// resize de la frame
+			parent.parent.TW().computeAppPortalHeight();
+			// on checke si l'ancien element a le focus pour le mettre sur le nouveau
+			if(select.is(':focus')){
+				select.parent().find(".searchable-select").focus();
+			}
+			
+		}
+	}
+	
+	
+	
+
+	function ajoutFiltreCombo(idListBox)
+	{
+		window.addEventListener("SCRIPT_RECHERCHE_DYN_LOADED", function(event){
+			try{
+				selectizeCombo(idListBox); 
+			}catch (error) {
+				console.log(error.stack);
+			}
+		});
+	}
+
+
+	function addScroll(tableId, tableSize){
+		
+		var table = $("#" + tableId); //
+		var parentDiv = table.closest('div');
+		if (!!table)
+		{
+			parentDiv.css("overflow-y", "auto");
+			parentDiv.css("width", "100%");
+			parentDiv.css("max-height", tableSize);
+			parentDiv.addClass("tableScroll");
+		}
+		// resize de la frame
+		parent.parent.TW().computeAppPortalHeight();
+	}
+	
+	
+	function ajoutScrollabliliteSurTable(idTable,tableSize){
+		
+		window.addEventListener("SCRIPT_RECHERCHE_DYN_LOADED", function(event){
+			try{
+				addScroll(idTable,tableSize);
+			}catch (error) {
+				console.log(error.stack);
+			}
+		});
+				
+	}
+	function ajoutRechercheTable(idtable)
+	{
+		window.addEventListener("SCRIPT_RECHERCHE_DYN_LOADED", function(event){
+			try{
+				addfilterMulti(idtable);
+				
+				// === ITUANGK - US 03.a - début - Gestion de la checkbox "(dé)sélectionner tout"
+				// on fait la recherche sur un bloc de tableau, pas sur tout le document
+				$("#" + idtable + " [id*=" + CONST_CHECKBOX_BASE_END + "]").attr("id",
+					function(_, id)
+					{
+						return manageCheckboxSelectAll(id);
+					}
+				)
+				// === ITUANGK - US 03.a - fin
+				var CONST_FILTER_ID_BASE = "valFiltreTable_";
+				// === ITUANGK - US03.a - début - agrandissement de la taille du champs de recherche
+				$("#" + CONST_FILTER_ID_BASE + idtable).attr('size', 50);
+				$("#" + CONST_FILTER_ID_BASE + idtable).attr('maxlength', 100);	
+				// === ITUANGK - US03.a - fin
+				
+				// === ITUANGK - S3 - recherche dynamique - début
+				manageFilter(idtable);
+				// resize de la frame
+				parent.parent.TW().computeAppPortalHeight();
+
+			}catch (error) {
+				console.log(error.stack);
+			}
+		});
+		
+	}
+
+	
