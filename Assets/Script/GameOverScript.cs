@@ -10,17 +10,20 @@ public class GameOverScript : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        Destroy(other.gameObject.GetComponent<MyCharacterController>());
-        Destroy(other.gameObject.GetComponent<Rigidbody>());
+		if(other.tag == "Player"){
+        	Destroy(other.gameObject.GetComponent<MyCharacterController>());
+        	Destroy(other.gameObject.GetComponent<Rigidbody>());
+			//Destroy(this.gameObject);
 
-        textComponent.text = gameOverMessage;
-        textComponent.enabled = true;
-        StartCoroutine(WaitAndRestart());
+        	textComponent.text = gameOverMessage;
+        	textComponent.enabled = true;
+        	StartCoroutine(WaitAndRestart());
+		}
     }
 
     IEnumerator WaitAndRestart()
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(3f);
         SceneManager.LoadScene(0);
     }
 }
