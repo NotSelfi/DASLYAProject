@@ -7,6 +7,7 @@ public class GameOverScript : MonoBehaviour
 {
     public TextMeshProUGUI textComponent;
     public string gameOverMessage;
+	public HealthBar healthBar;
     
     private void OnTriggerEnter(Collider other)
     {
@@ -14,7 +15,8 @@ public class GameOverScript : MonoBehaviour
         	Destroy(other.gameObject.GetComponent<MyCharacterController>());
         	Destroy(other.gameObject.GetComponent<Rigidbody>());
 			//Destroy(this.gameObject);
-
+			//currentHealth -= damage;
+        	healthBar.SetHealth(0);
         	textComponent.text = gameOverMessage;
         	textComponent.enabled = true;
         	StartCoroutine(WaitAndRestart());
